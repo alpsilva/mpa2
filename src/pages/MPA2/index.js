@@ -1,9 +1,9 @@
 import React from 'react';
 import './style.css'
-import Sidebar from './Components/Sidebar';
-import Navigator from './Components/Navigator';
+import Sidebar from '../../Components/Sidebar';
+import Navigator from '../../Components/Navigator';
 import HomeIcon from '@mui/icons-material/Home';
-import StatisticsTable from './Components/StatisticsComponent/StatisticsTable'
+import StatisticsTable from '../../Components/StatisticsComponent/StatisticsTable'
 import { cards, statistics } from '../../data';
 
 export default function MPA2 () {

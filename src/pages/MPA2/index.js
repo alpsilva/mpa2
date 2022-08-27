@@ -4,8 +4,7 @@ import Sidebar from './Components/Sidebar';
 import Navigator from './Components/Navigator';
 import HomeIcon from '@mui/icons-material/Home';
 import StatisticsTable from './Components/StatisticsComponent/StatisticsTable'
-import { cards } from './data';
-import { statistics } from './statistics'
+import { cards, statistics } from '../../data';
 
 export default function MPA2 () {
     return (

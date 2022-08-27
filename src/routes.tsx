@@ -8,10 +8,9 @@ export default function AppRoutes() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Upload />}>
-                    <Route path="mpa2" element={<MPA2 />}/>
+                <Route path={Links.UPLOAD} element={<Upload />}>
+                    <Route path={Links.MPA2} element={<MPA2 />}/>
                 </Route>
-                
             </Routes>
         </BrowserRouter>
     )

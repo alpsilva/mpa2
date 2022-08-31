@@ -5,11 +5,10 @@ import {
     ButtonGroup,
  } from '@mui/material';
 
-
 function Navigator() {
   return (
     <div className='nav'>
-        <div className='nav-buttons'>
+        <div className='nav-buttons' style={{width: '100%'}}>
         <Button variant="contained">Filtros</Button>
         <ButtonGroup variant="outlined" aria-label="outlined button group">
             <Button>Demandas</Button>

@@ -4,7 +4,7 @@ import Card from './Card';
 
 function Sidebar({cards}) {
   return (
-    <div className='sidebar'>
+    <div className='sidebar' style={{width: '96.3%'}}>
       {cards.map(({id, label, items}) => {
         return (
           <Card id={id} label={label} items={items} />)

@@ -5,7 +5,6 @@ import {
     ButtonGroup,
  } from '@mui/material';
 
-
 function Navigator() {
   return (
     <div className='nav'>

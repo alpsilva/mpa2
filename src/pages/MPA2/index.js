@@ -16,7 +16,7 @@ export default function MPA2 () {
                 <Navigator />
                 <Sidebar cards={cards}/>
             </Box>
-            <Box sx={{width: '70%', height: '30%', display: 'flex', justifyContent: 'space-evenly'}}>
+            <Box sx={{width: '70%', height: '25%', display: 'flex', justifyContent: 'space-evenly'}}>
                 <ExibitionTable /> 
                 <DetailsTable />
                 <StatisticsTable statisticsProp={statistics} />

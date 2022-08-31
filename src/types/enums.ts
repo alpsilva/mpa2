@@ -1,5 +1,4 @@
 export enum Links {
-    UPLOAD = '/upload',
+    Upload = '/upload',
     MPA2 = '/mpa2',
-    MODAL='/modal',
 }

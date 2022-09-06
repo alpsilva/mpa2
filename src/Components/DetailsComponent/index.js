@@ -1,6 +1,7 @@
 import { Box, Typography, Slider } from "@mui/material";
 
-export default function DetailsTable () {
+export default function DetailsTable (detailsTableProps) {
+    const { tarefas, caminhos } = {detailsTableProps};
     return (
         <Box sx={{width: "35%", height: "60%", backgroundColor: "#131E2F",}}>
             <Box sx={{height: '100%', width: '100%', paddingRight: '1em', display: 'flex', flexDirection:'column', justifyContent: 'center'}}>

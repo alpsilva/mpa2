@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import './style.css'
 
-export default function ExibitionTable () {
+export default function ExibitionTable ({exibitionProps}) {
     return (
         <Box sx={{width: "20%", height: "60%", backgroundColor: "#131E2F",}}>
             <Box className="box">

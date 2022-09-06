@@ -17,7 +17,7 @@ export default function MPA2 () {
     }, []);
 
     const getFluxogram = () => {
-        axios.get('//localhost:8081/bob/api/fluxograma')
+        axios.get('//localhost:1234/bob/api/fluxograma')
             .then((response) => {
                 const dados = response.data;
                 getData(dados);

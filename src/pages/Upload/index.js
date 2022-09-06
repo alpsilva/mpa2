@@ -20,7 +20,7 @@ export const Upload = ({onSuccess}) => {
             data.append('file', files[i]);
         }
 
-        axios.post('//localhost:8081/bob/api/upload', data)
+        axios.post('//localhost:1234/bob/api/upload', data)
             .then((response) => {
                 toast.success('Upload Success');
                 onSuccess(response.data)

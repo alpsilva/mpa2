@@ -1,5 +1,6 @@
 import pandas as pd
 import pm4py
+import copy
 
 LOGS = None
 
@@ -21,4 +22,4 @@ def read_local_logs():
     LOGS = pm4py.convert_to_event_log(df)
 
 def get_logs():
-    return LOGS
+    return copy.deepcopy(LOGS)

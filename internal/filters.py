@@ -8,7 +8,6 @@ def filter_log_by_demand(log: EventLog, demand_type: str):
 # Filtro cliente
 def get_standard_client(log):
     clientes_count = {}
-    
     for trace in log:
         cliente = trace.attributes['cliente']
         if cliente not in clientes_count:
@@ -23,3 +22,7 @@ def get_standard_demanda(log):
     demandas = pm4py.get_event_attribute_values(log, "tp_demanda")
     max_key = max(demandas, key = demandas.get)
     return max_key
+
+def get_demandas(log):
+    demandas = pm4py.get_event_attribute_values(log, "tp_demanda")
+    return demandas

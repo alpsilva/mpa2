@@ -21,7 +21,7 @@
     right: 0;
     height: 56px;
     content: "";
-    background-image: url(D:\Documentos\mpa2\src\assets\download-button-svgrepo-com.svg);
+    /*background-image: url(./src/assets/download-button-svgrepo-com.svg);*/
     display: block;
     margin: 0 auto;
     background-size: 100%;

@@ -1,21 +1,12 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
+import './style.css'
 
 const StatisticsTable = ({ statisticsProp }) => {
   const { demands, variants, activities, duration, mean } = statisticsProp;
   return (
     <Box sx={{width: "35%"}}>
-      <Box
-      sx={{
-        height: "80%",
-        backgroundColor: "#131E2F",
-        boxSizing: "border-box",
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-evenly',
-        paddingX: '1em',
-        paddingY: '0.3em',
-      }}
+      <Box className="wrapper"
     >
       <Typography variant="p" color="#FBFBFF"> Quantidade de demandas: {demands}
       </Typography>
@@ -28,7 +19,7 @@ const StatisticsTable = ({ statisticsProp }) => {
       <Typography variant="p" color="#FBFBFF"> Duração média das demandas: {mean}
       </Typography>
     </Box>
-    <Box sx={{backgroundColor: "#131E2F", height: '12%', width: '45%', paddingLeft: '1em', borderRadius:'15px'}}>
+    <Box sx={{backgroundColor: "#131E2F", height: '12%', width: '45%', paddingLeft: '1em', borderRadius:'0 0 15px 15px'}}>
         <Typography variant='p' color='#FBFBFF' >
           Estatísticas:
         </Typography>

@@ -5,9 +5,27 @@ body {
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-size: 0.75rem;
   }
   
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
-  
+
+@media screen and (min-width: 1200px){
+    body{
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (min-width: 1400px){
+    body{
+        font-size: 1.1rem;
+    }
+}
+
+@media screen and (min-width: 1920px){
+    body{
+        font-size: 1.5rem;
+    }
+}

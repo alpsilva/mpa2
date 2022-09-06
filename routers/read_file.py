@@ -5,19 +5,18 @@ from internal.read_file import read_logs, read_local_logs, get_logs
 from internal import read_file
 
 router = APIRouter(
-    prefix="/bob/api/", #rota a ser definida pelo
+    prefix="/bob/api", #rota a ser definida pelo
     tags=['read file'],
     responses={404: {"Bob: read file": "Not found"}}
 )
 
-@router.put("/upload")
+@router.post("/upload")
 async def upload_csv(file: UploadFile):
     try:
-        read_logs(file.file)
-        r = True
+        r = read_logs(file.file)
     except:
         print_exc()
-        r = False
+        r = {}
     return r
 
 @router.put("/LocalCsv")

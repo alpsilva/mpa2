@@ -6,8 +6,8 @@
     "exibicao" : "frequencia",
  
     "detalhes" : {
-        "tarefas" : 0,
-        "caminhos" : 0
+        "tarefas" : 1,
+        "caminhos" : 3
     },
    
     "estatisticas" : {

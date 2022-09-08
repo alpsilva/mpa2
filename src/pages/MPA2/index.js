@@ -34,8 +34,8 @@ export default function MPA2 () {
                 <Sidebar cards={cards}/>
             </Box>
             <Box sx={{width: '70%', height: '25%', display: 'flex', justifyContent: 'space-evenly'}}>
-                <ExibitionTable selected={mock.exibicao}/> 
-                <DetailsTable selected={mock.detalhes}/>
+                <ExibitionTable exibitionProps={mock.exibicao}/> 
+                <DetailsTable detailsTableProps={mock.detalhes}/>
                 <StatisticsTable statisticsProp={mock.estatisticas} />
             </Box>
         </Box>

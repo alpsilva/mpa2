@@ -8,7 +8,7 @@ import {
 
  import CardItems from './CardItems';
  import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
- 
+
 
 function Card({id, label, items}) {
   return (
@@ -30,7 +30,7 @@ function Card({id, label, items}) {
                     <Typography>
                         <CardItems id={id} items={items}/>
                     </Typography>
-                    
+
                 </div>
             </AccordionDetails>
         </Accordion>

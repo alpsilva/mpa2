@@ -1,12 +1,14 @@
 import Sidebar from '../../Components/Sidebar';
 import Navigator from '../../Components/Navigator';
 import DFG from '../../Components/DFG/DFG';
+import { cards } from '../../Components/Data';
 import { useState, useEffect } from 'react'
 import HomeIcon from '@mui/icons-material/Home';
 import StatisticsTable from '../../Components/StatisticsComponent'
 import DetailsTable from '../../Components/DetailsComponent';
 import ExibitionTable from '../../Components/ExibitionComponent';
-import { Box } from '@mui/material'
+import { Box } from '@mui/material';
+import mock from '../../mock.json'
 import axios from 'axios';
 
 export default function MPA2 () {
@@ -29,12 +31,12 @@ export default function MPA2 () {
             <Box sx={{width: '30%', height: '100%', backgroundColor: '#131E2F'}}>
                 <HomeIcon color="primary" sx={{ fontSize: 50 }} />
                 <Navigator />
-                <Sidebar cards={data.cards}/>
+                <Sidebar cards={cards}/>
             </Box>
             <Box sx={{width: '70%', height: '25%', display: 'flex', justifyContent: 'space-evenly'}}>
-                <ExibitionTable selected={data.exibicao}/> 
-                <DetailsTable selected={data.detalhes}/>
-                <StatisticsTable statisticsProp={data.estatisticas} />
+                <ExibitionTable selected={mock.exibicao}/> 
+                <DetailsTable selected={mock.detalhes}/>
+                <StatisticsTable statisticsProp={mock.estatisticas} />
             </Box>
         </Box>
     )

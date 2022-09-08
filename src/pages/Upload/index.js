@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import axios from 'axios';
 import { toast} from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 import './style.css';
 
@@ -23,12 +24,17 @@ export const Upload = ({onSuccess}) => {
         axios.post('//localhost:1234/bob/api/upload', data)
             .then((response) => {
                 toast.success('Upload Success');
-                onSuccess(response.data)
+                onSuccess(response.data);
             })
             .catch((e) => {
                 toast.error('Upload Error')
             })
     };
+    const navigate = useNavigate();
+    const mpaRedirect = () => {
+        let path = '/mpa2';
+        navigate(path);
+    }
 
     return (
         <form method="post" action="#" id="#" onSubmit={onSubmit}>
@@ -39,7 +45,7 @@ export const Upload = ({onSuccess}) => {
                        multiple/>
             </div>
 
-            <button>Submit</button>
+            <button onClick={mpaRedirect}>Submit</button>
         </form>
     )
 };

@@ -9,13 +9,13 @@ export default function DetailsTable (detailsTableProps) {
                     <Typography sx={{alignSelf: 'center'}} variant='p' color='#FBFBFF' >
                         Tarefas
                     </Typography>
-                    <Slider sx={{width: '60%'}} min={0} max={4} step={1} marks/>
+                    <Slider defaultValue={2} sx={{width: '60%'}} min={0} max={4} step={1} marks/>
                 </Box>
                 <Box sx={{display: 'flex', justifyContent: 'space-around'}}>
                     <Typography sx={{alignSelf: 'center'}} variant='p' color='#FBFBFF' >
                         Caminhos
                     </Typography>
-                    <Slider sx={{width: '60%'}} min={0} max={4} step={1} marks/>
+                    <Slider defaultValue={2} sx={{width: '60%'}} min={0} max={4} step={1} marks/>
                 </Box>
             </Box>
             <Box sx={{backgroundColor: "#131E2F", height:'22%', width: '40%', paddingLeft: '1em', borderRadius: '0 0 15px 15px'}}>

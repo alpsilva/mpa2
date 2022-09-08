@@ -1,7 +1,7 @@
-import Sidebar from '../../Components/Sidebar';
-import Navigator from '../../Components/Navigator';
+import Sidebar from '../../Components/Sidebar/Sidebar';
+import Navigator from '../../Components/Sidebar/Navigator';
 import DFG from '../../Components/DFG/DFG';
-import { cards } from '../../Components/Data';
+import { cards } from '../../Components/Sidebar/Data';
 import { useState, useEffect } from 'react'
 import HomeIcon from '@mui/icons-material/Home';
 import StatisticsTable from '../../Components/StatisticsComponent'

@@ -15,7 +15,7 @@ function CardItems({id, items}) {
                 <FormControl>
                     <RadioGroup 
                         aria-labelledby="demo-radio-buttons-group-label"
-                        defaultValue={items[0].value}
+                        defaultValue={items[0].id}
                         name="radio-buttons-group">
 
                         {items.map(({ label, id }) => (

@@ -9,7 +9,6 @@ import ExibitionTable from '../../Components/ExibitionComponent';
 import { Box } from '@mui/material';
 import mock from '../../mock.json'
 import {useLocation} from 'react-router-dom';
-import axios from 'axios';
 
 function SVGConditional(exibicao, freqSvg, perfSvg) {
     if(exibicao === 'frequencia') {

@@ -25,13 +25,10 @@ export const Upload = ({onSuccess}) => {
 
         await axios.post('//localhost:8081/bob/api/upload', data)
             .then((response) => {
-                toast.success('Upload Success');
-                onSuccess(response.data);
-                let path = '/mpa2';
-                navigate(path, {state:{props: response.data}});
+                navigate('/mpa2', {state:{props: response.data}});
             })
             .catch((e) => {
-                toast.error('Upload Error')
+                toast.error('Upload Error');
             })
     };
 

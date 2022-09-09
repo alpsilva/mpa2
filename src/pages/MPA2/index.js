@@ -34,7 +34,7 @@ export default function MPA2 () {
                     <DetailsTable detailsTableProps={mock.detalhes} />
                     <StatisticsTable statisticsProp={data.stats} />
                 </Box>
-                <Box> 
+                <Box sx={{height: '75%', display: 'flex'}}>
                     {SVGConditional(data.filters.exibicao, data.freq_svg, data.perf_svg)}
                 </Box>
             </Box>

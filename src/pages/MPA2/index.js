@@ -8,6 +8,7 @@ import DetailsTable from '../../Components/DetailsComponent';
 import ExibitionTable from '../../Components/ExibitionComponent';
 import { Box } from '@mui/material';
 import mock from '../../mock.json'
+import {useLocation} from 'react-router-dom';
 import axios from 'axios';
 
 function SVGConditional(exibicao, freqSvg, perfSvg) {
@@ -18,7 +19,8 @@ function SVGConditional(exibicao, freqSvg, perfSvg) {
 }
 
 export default function MPA2 () {
-    const data = this.props.location.state.props;
+    const location = useLocation();
+    const data = location.state.props;
 
     return (
         <Box sx={{backgroundColor:'#BCCADA', height: '100vh', width: '100vw', display: 'flex'}}>

@@ -3,7 +3,7 @@ import SVG from 'react-inlinesvg'
 const DFG = ({DFGProps}) => {
     return (
     <div>
-        <SVG src={DFGProps}/>
+        <SVG width={800} src={DFGProps}/>
     </div>
     );
 };

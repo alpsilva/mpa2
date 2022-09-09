@@ -1,10 +1,11 @@
 import SVG from 'react-inlinesvg'
 
 const DFG = ({DFGProps}) => {
-    const { image } = DFGProps; 
+    // NÃO descomente esta porra
+    // const { image } = DFGProps;
     return (
     <div>
-        <SVG src={image}/>
+        <SVG src={DFGProps}/>
     </div>
     );
 };

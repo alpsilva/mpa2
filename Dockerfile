@@ -1,5 +1,9 @@
 FROM python:3.9
 
+RUN apt-get update && \
+    apt-get clean;
+RUN apt-get -y install sudo && \
+    sudo apt-get -y install graphviz
 WORKDIR /mpa2
 RUN pip install --upgrade pip
 COPY requirements.txt ./

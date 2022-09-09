@@ -3,6 +3,8 @@ import pm4py
 import copy
 
 from internal.filters import filter_log_by_demand, get_standard_client, get_standard_demanda, get_demandas, filter_log_by_cliente
+from internal.visualization import generate_svg
+from internal.stats import get_log_statistics
 
 LOGS = None
 FILTERED_LOG = None
@@ -29,12 +31,32 @@ def read_logs(file):
     FILTERED_LOG = filter_log_by_demand(FILTERED_LOG, default_demanda)
     print("Log filtrado (demanda):", len(FILTERED_LOG))
 
-    return {
-        "cliente": default_cliente,
-        "demanda": default_demanda,
-        "logSize": len(FILTERED_LOG)
-    }
+    freq_dfg_file_path, perf_dfg_file_path = generate_svg(FILTERED_LOG)
 
+    with open(freq_dfg_file_path[1:], encoding='utf-8') as file:
+        freq_dfg_str = "".join(file.read().splitlines())
+
+    with open(perf_dfg_file_path[1:], encoding='utf-8') as file:
+        perf_dfg_str = "".join(file.read().splitlines())
+
+    stats = get_log_statistics(FILTERED_LOG)
+
+    return {
+        "filters": {
+            "cliente": default_cliente,
+            "demanda": default_demanda,
+            "exibicao": "frequencia"
+        },
+
+        "stats": stats,
+
+        "detalhes": {
+            "logSize": len(FILTERED_LOG)
+        },
+
+        "freq_svg": freq_dfg_str,
+        "perf_svg": perf_dfg_str
+    }
 
 def read_local_logs():
     global LOGS

@@ -19,14 +19,16 @@ async def upload_csv(file: UploadFile):
         r = {}
     return r
 
-@router.put("/LocalCsv")
+@router.post("/LocalCsv")
 async def upload_csv():
     try:
-        read_local_logs()
-        r = True
+        file_path = "./internal/log_teste.csv"
+        file = open(file_path)
+        r = read_logs(file)
+        file.close()
     except:
         print_exc()
-        r = False
+        r = {}
     return r
 
 @router.get("/check")

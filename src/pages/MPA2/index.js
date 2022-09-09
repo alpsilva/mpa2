@@ -13,7 +13,7 @@ import axios from 'axios';
 
 function SVGConditional(exibicao, freqSvg, perfSvg) {
     if(exibicao === 'frequencia') {
-        return (<DFG DFGProps={freqSvg}/>);
+        return (<DFG DFGProps={freqSvg} />);
     }
     return (<DFG DFGProps={perfSvg} />);
 }
@@ -40,8 +40,8 @@ export default function MPA2 () {
                 <Navigator />
                 <Sidebar cards={cards}/>
             </Box>
-            <Box sx={{width: '70%', height: '25%', display: 'flex', justifyContent: 'space-evenly'}}>
-                <Box>
+            <Box sx={{width: '70%', height: '100%', display: 'flex', flexDirection: 'column'}}>
+                <Box sx={{height: '25%', display: 'flex', justifyContent: 'space-around'}} >
                     <ExibitionTable exibitionProps={data.filters.exibicao} /> 
                     <DetailsTable detailsTableProps={mock.detalhes} />
                     <StatisticsTable statisticsProp={data.stats} />

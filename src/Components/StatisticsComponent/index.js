@@ -11,14 +11,14 @@ const StatisticsTable = ({ statisticsProp }) => {
       </Typography>
       <Typography variant="p" color="#FBFBFF"> Quantidade de atividades: {atividades}
       </Typography>
-      <Typography variant="p" color="#FBFBFF"> Duração média das demandas: {duracao} dias
+      <Typography variant="p" color="#FBFBFF"> Duração média das demandas: {duracao} segundos
       </Typography>
       <Typography variant="p" color="#FBFBFF"> Duração média das demandas: {media}
       </Typography>
     </Box>
     <Box sx={{backgroundColor: "#131E2F", height: '12%', width: '45%', paddingLeft: '1em', borderRadius:'0 0 15px 15px'}}>
         <Typography variant='p' color='#FBFBFF' >
-          Estatísticas:
+          Estatísticas
         </Typography>
     </Box>
     </Box>

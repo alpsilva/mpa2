@@ -19,7 +19,7 @@ const ExibitionTable = ({exibitionProps}) => {
             </Box>
             <Box sx={{backgroundColor: "#131E2F", height:'22%', width: '62%', paddingLeft: '1em', borderRadius: '0 0 15px 15px'}}>
                 <Typography variant='p' color='#FBFBFF' >
-                  Exibir por:
+                  Exibir por
                 </Typography>
             </Box>
         </Box>

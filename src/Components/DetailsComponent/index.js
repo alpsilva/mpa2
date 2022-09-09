@@ -20,7 +20,7 @@ const DetailsTable = ({detailsTableProps}) => {
             </Box>
             <Box sx={{backgroundColor: "#131E2F", height:'22%', width: '40%', paddingLeft: '1em', borderRadius: '0 0 15px 15px'}}>
                 <Typography variant='p' color='#FBFBFF' >
-                      Detalhes:
+                      Detalhes
                 </Typography>
             </Box>
         </Box>

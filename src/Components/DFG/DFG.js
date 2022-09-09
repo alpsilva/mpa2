@@ -1,17 +1,12 @@
-import React from 'react';
-import Graph from './MockedValues/mochi.svg'
-import styled from'styled-components';
+import SVG from 'react-inlinesvg'
 
-const Wrapper = styled.div`
-    display: flex;
-    justify-content: center;
-`
-const DFG = () => {
+const DFG = ({DFGProps}) => {
+    const { image } = DFGProps; 
     return (
-        <Wrapper>
-            <img src={Graph} alt="graph" width='720'/>
-        </Wrapper>
-    )
-}
+    <div>
+        <SVG src={image}/>
+    </div>
+    );
+};
 
 export default DFG;

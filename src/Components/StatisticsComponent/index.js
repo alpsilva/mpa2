@@ -2,18 +2,16 @@ import { Box, Typography } from "@mui/material";
 import './style.css'
 
 const StatisticsTable = ({ statisticsProp }) => {
-  const { demandas, variante, atividades, duracao, media } = statisticsProp;
+  const { demandas, atividades, duracao, media } = statisticsProp;
   return (
     <Box sx={{width: "35%"}}>
       <Box className="wrapper"
     >
       <Typography variant="p" color="#FBFBFF"> Quantidade de demandas: {demandas}
       </Typography>
-      <Typography variant="p" color="#FBFBFF"> Quantidade de variantes: {variante}
-      </Typography>
       <Typography variant="p" color="#FBFBFF"> Quantidade de atividades: {atividades}
       </Typography>
-      <Typography variant="p" color="#FBFBFF"> Duração média das demandas: {duracao}
+      <Typography variant="p" color="#FBFBFF"> Duração média das demandas: {duracao} dias
       </Typography>
       <Typography variant="p" color="#FBFBFF"> Duração média das demandas: {media}
       </Typography>

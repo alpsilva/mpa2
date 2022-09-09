@@ -30,6 +30,7 @@ export const Upload = ({onSuccess}) => {
                 toast.error('Upload Error')
             })
     };
+
     const navigate = useNavigate();
     const mpaRedirect = () => {
         let path = '/mpa2';

@@ -22,12 +22,12 @@ export const cards = [
             {
                 id: 'novo-sistema', 
                 label: 'Novo Sistema', 
-                value: false
+                value: true
             }, 
             {
                 id: 'demanda-evolutiva', 
                 label: 'Demanda Evolutiva', 
-                value: true
+                value: false
             }
         ]
     },

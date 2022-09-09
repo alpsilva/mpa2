@@ -12,7 +12,7 @@ import mock from '../../mock.json'
 import axios from 'axios';
 
 export default function MPA2 () {
-    const [data, getData] = useState('');
+    const [data, setData] = useState('');
 
     useEffect(() => {
         getFluxogram();
@@ -22,7 +22,7 @@ export default function MPA2 () {
         axios.get('//localhost:1234/bob/api/fluxograma')
             .then((response) => {
                 const dados = response.data;
-                getData(dados);
+                setData(dados);
             })
     }
 
@@ -34,9 +34,14 @@ export default function MPA2 () {
                 <Sidebar cards={cards}/>
             </Box>
             <Box sx={{width: '70%', height: '25%', display: 'flex', justifyContent: 'space-evenly'}}>
-                <ExibitionTable exibitionProps={mock.exibicao}/> 
-                <DetailsTable detailsTableProps={mock.detalhes}/>
-                <StatisticsTable statisticsProp={mock.estatisticas} />
+                <Box>
+                    <ExibitionTable exibitionProps={data.filters.exibicao} /> 
+                    <DetailsTable detailsTableProps={mock.detalhes} />
+                    <StatisticsTable statisticsProp={data.stats} />
+                </Box>
+                <Box>
+                    <DFG DFGProps={'<svg height="210" width="500"><polygon points="200,10 250,190 160,210" style="fill:lime;stroke:purple;stroke-width:1" />Sorry, your browser does not support inline SVG.</svg>'}/>
+                </Box>
             </Box>
         </Box>
     )

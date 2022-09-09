@@ -15,10 +15,9 @@ def get_log_statistics(eventlog: EventLog):
 
         for activity in trace:
             activity_duration = activity['dt_fim'] - activity['dt_inicio']
-            trace_duration += activity_duration
+            trace_duration += activity_duration.total_seconds()
 
         durations.append(trace_duration)
-
 
     duracao = 0
     if len(durations) > 0:

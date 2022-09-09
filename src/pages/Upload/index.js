@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import axios from 'axios';
 import { toast} from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Redirect } from 'react-router-dom';
 
 import './style.css';
 
@@ -23,12 +23,16 @@ export const Upload = ({onSuccess}) => {
             data.append('file', files[i]);
         }
 
-        await axios.post('//localhost:1234/bob/api/upload', data)
+        await axios.post('//localhost:8081/bob/api/upload', data)
             .then((response) => {
                 toast.success('Upload Success');
                 onSuccess(response.data);
-                let path = '/mpa2';
-                navigate(path);
+                <Redirect
+                to={{
+                pathname: "/mpa2",
+                state: { props: response.data }
+          }}
+        />
             })
             .catch((e) => {
                 toast.error('Upload Error')

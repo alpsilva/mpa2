@@ -2,7 +2,6 @@ import Sidebar from '../../Components/Sidebar/Sidebar';
 import Navigator from '../../Components/Sidebar/Navigator';
 import DFG from '../../Components/DFG/DFG';
 import { cards } from '../../Components/Sidebar/Data';
-import { useState, useEffect } from 'react'
 import HomeIcon from '@mui/icons-material/Home';
 import StatisticsTable from '../../Components/StatisticsComponent'
 import DetailsTable from '../../Components/DetailsComponent';
@@ -19,19 +18,7 @@ function SVGConditional(exibicao, freqSvg, perfSvg) {
 }
 
 export default function MPA2 () {
-    const [data, setData] = useState('');
-
-    useEffect(() => {
-        getFluxogram();
-    }, []);
-
-    const getFluxogram = async () => {
-        await axios.get('//localhost:1234/bob/api/fluxograma')
-            .then((response) => {
-                const dados = response.data;
-                setData(dados);
-            })
-    }
+    const data = this.props.location.state.props;
 
     return (
         <Box sx={{backgroundColor:'#BCCADA', height: '100vh', width: '100vw', display: 'flex'}}>

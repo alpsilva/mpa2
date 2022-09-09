@@ -12,7 +12,9 @@ export const Upload = ({onSuccess}) => {
         setFiles(e.target.files)
     };
 
-    const onSubmit = (e) => {
+    const navigate = useNavigate();
+
+    const onSubmit = async (e) => {
         e.preventDefault();
 
         const data = new FormData();
@@ -21,21 +23,17 @@ export const Upload = ({onSuccess}) => {
             data.append('file', files[i]);
         }
 
-        axios.post('//localhost:1234/bob/api/upload', data)
+        await axios.post('//localhost:1234/bob/api/upload', data)
             .then((response) => {
                 toast.success('Upload Success');
                 onSuccess(response.data);
+                let path = '/mpa2';
+                navigate(path);
             })
             .catch((e) => {
                 toast.error('Upload Error')
             })
     };
-
-    const navigate = useNavigate();
-    const mpaRedirect = () => {
-        let path = '/mpa2';
-        navigate(path);
-    }
 
     return (
         <form method="post" action="#" id="#" onSubmit={onSubmit}>
@@ -46,7 +44,7 @@ export const Upload = ({onSuccess}) => {
                        multiple/>
             </div>
 
-            <button onClick={mpaRedirect}>Submit</button>
+            <button>Submit</button>
         </form>
     )
 };

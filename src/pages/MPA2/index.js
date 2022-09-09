@@ -11,6 +11,13 @@ import { Box } from '@mui/material';
 import mock from '../../mock.json'
 import axios from 'axios';
 
+function SVGConditional(exibicao, freqSvg, perfSvg) {
+    if(exibicao === 'frequencia') {
+        return (<DFG DFGProps={freqSvg}/>);
+    }
+    return (<DFG DFGProps={perfSvg} />);
+}
+
 export default function MPA2 () {
     const [data, setData] = useState('');
 
@@ -40,7 +47,7 @@ export default function MPA2 () {
                     <StatisticsTable statisticsProp={data.stats} />
                 </Box>
                 <Box>
-                    <DFG DFGProps={'<svg height="210" width="500"><polygon points="200,10 250,190 160,210" style="fill:lime;stroke:purple;stroke-width:1" />Sorry, your browser does not support inline SVG.</svg>'}/>
+                    {SVGConditional(data.filters.exibicao, data.freq_svg, data.perf_svg)}
                 </Box>
             </Box>
         </Box>

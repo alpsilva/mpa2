@@ -1,4 +1,6 @@
 export enum Links {
     Upload = '/',
-    MPA2 = '/mpa2',
+    Filter = '/filter',
+    Demands = '/demands',
+    Activities = '/activities'
 }

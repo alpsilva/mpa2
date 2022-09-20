@@ -12,6 +12,11 @@ export const cards = [
                 id: 'cliente-2', 
                 label: 'Cliente 2', 
                 value: false
+            },
+            {
+                id: 'cliente-3', 
+                label: 'Cliente 3', 
+                value: false
             }
         ]
     },

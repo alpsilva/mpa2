@@ -7,12 +7,11 @@ import './style.css';
 
 export const Upload = ({onSuccess}) => {
     const [files, setFiles] = useState([]);
+    const navigate = useNavigate();
 
     const onInputChange = (e) => {
         setFiles(e.target.files)
     };
-
-    const navigate = useNavigate();
 
     const onSubmit = async (e) => {
         e.preventDefault();

@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { Links } from '../../types/enums'
 import Sidebar from '../../Components/Sidebar/Sidebar';
 import Navigator from '../../Components/Sidebar/Navigator';
 import DFG from '../../Components/DFG/DFG';
@@ -8,23 +10,28 @@ import DetailsTable from '../../Components/DetailsComponent';
 import ExibitionTable from '../../Components/ExibitionComponent';
 import { Box } from '@mui/material';
 import mock from '../../mock.json'
-import {useLocation} from 'react-router-dom';
+import {useLocation, useNavigate } from 'react-router-dom';
 
-function SVGConditional(exibicao, freqSvg, perfSvg) {
+function SVGConditional(exibicao, freqSVG, perfSVG) {
     if(exibicao === 'frequencia') {
-        return (<DFG DFGProps={freqSvg} />);
+        return (<DFG DFGProps={freqSVG} />);
     }
-    return (<DFG DFGProps={perfSvg} />);
+    return (<DFG DFGProps={perfSVG} />);
 }
 
 export default function MPA2 () {
+    const [ exibitionState, setExibitionState ] = useState('frequencia');
+    const [ detailsState, setDetailsState ] = useState({});
+    const navigate = useNavigate();
     const location = useLocation();
     const data = location.state.props;
+    const freqSVG = data.freq_svg;
+    const perfSVG = data.perf_svg;
 
     return (
         <Box sx={{backgroundColor:'#BCCADA', height: '100vh', width: '100vw', display: 'flex'}}>
             <Box sx={{width: '30%', height: '100%', backgroundColor: '#131E2F'}}>
-                <HomeIcon color="primary" sx={{ fontSize: 50 }} />
+                <HomeIcon color="primary" sx={{ fontSize: 50 }} onClick={navigate(Links.Upload)} />
                 <Navigator />
                 <Sidebar cards={cards}/>
             </Box>
@@ -35,7 +42,7 @@ export default function MPA2 () {
                     <StatisticsTable statisticsProp={data.stats} />
                 </Box>
                 <Box sx={{height: '75%', display: 'flex'}}>
-                    {SVGConditional(data.filters.exibicao, data.freq_svg, data.perf_svg)}
+                    {SVGConditional(exibitionState, freqSVG, perfSVG)}
                 </Box>
             </Box>
         </Box>

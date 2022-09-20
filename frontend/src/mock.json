@@ -1,20 +1,6 @@
 {
-    "cliente": "Cliente 1",
-    "tipoDemanda" : "novoSistema",
-    "dataInicial" : "",
-    "dataFinal" : "",
-    "exibicao" : "frequencia",
- 
     "detalhes" : {
         "tarefas" : 1,
         "caminhos" : 3
-    },
-   
-    "estatisticas" : {
-        "demandas" : 0,
-        "variante" : 0,
-        "atividades" : 0,
-        "duracao" : 0,
-        "media" : 0
     }
 }

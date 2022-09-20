@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { Links } from '../../types/enums'
+import {useLocation, useNavigate } from 'react-router-dom';
 import Sidebar from '../../Components/Sidebar/Sidebar';
 import Navigator from '../../Components/Sidebar/Navigator';
 import DFG from '../../Components/DFG/DFG';
 import { cards } from '../../Components/Sidebar/Data';
-import HomeIcon from '@mui/icons-material/Home';
 import StatisticsTable from '../../Components/StatisticsComponent'
 import DetailsTable from '../../Components/DetailsComponent';
 import ExibitionTable from '../../Components/ExibitionComponent';
+import HomeIcon from '@mui/icons-material/Home';
 import { Box } from '@mui/material';
+import { Links } from '../../types/enums'
 import mock from '../../mock.json'
-import {useLocation, useNavigate } from 'react-router-dom';
 
 function SVGConditional(exibicao, freqSVG, perfSVG) {
     if(exibicao === 'frequencia') {
@@ -29,9 +29,7 @@ export default function FilterScreen () {
 
     return (
         <Box sx={{backgroundColor:'#BCCADA', height: '100vh', width: '100vw', display: 'flex'}}>
-            <Box sx={{width: '30%', height: '100%', backgroundColor: '#131E2F'}}>
-                <HomeIcon color="primary" sx={{ fontSize: 50 }} onClick={navigate(Links.Upload)} />
-                <Navigator />
+            <Box sx={{width: '30%', height: '100%'}}>
                 <Sidebar cards={cards}/>
             </Box>
             <Box sx={{width: '70%', height: '100%', display: 'flex', flexDirection: 'column'}}>

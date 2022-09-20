@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import './style.css';
 
-export const Upload = ({onSuccess}) => {
+export const Upload = () => {
     const [files, setFiles] = useState([]);
     const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ export const Upload = ({onSuccess}) => {
 
         await axios.post('//localhost:8081/bob/api/upload', data)
             .then((response) => {
-                navigate('/mpa2', {state:{props: response.data}});
+                navigate('/Filter', {state:{props: response.data}});
             })
             .catch((e) => {
                 toast.error('Upload Error');

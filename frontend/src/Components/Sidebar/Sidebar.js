@@ -1,14 +1,20 @@
-import React from 'react';
 import Card from './Card';
+import Navigator from './Navigator';
+import { useNavigate } from 'react-router-dom';
+import { Box } from '@mui/material';
+import { HomeIcon } from '@mui/icons-material';
+import { Links } from '../../types/enums';
 
-
-function Sidebar({cards}) {
+function Sidebar() {
+  const navigate = useNavigate();
   return (
-    <div className='sidebar' style={{width: '96.3%'}}>
-      {cards.map(({id, label, items}) => {
-        return (
-          <Card id={id} label={label} items={items} />)
-      })}
+    <div style={{width: '100%', height: '100%', backgroundColor: '#131E2F'}}>
+      <Box sx={{height: '25%'}}>
+        <HomeIcon color="primary" sx={{ fontSize: 50 }} onClick={navigate(Links.Upload)} />
+        <Navigator />
+      </Box>
+      <Box sx={{height: '75%'}}>
+      </Box>
     </div>
   )
 }

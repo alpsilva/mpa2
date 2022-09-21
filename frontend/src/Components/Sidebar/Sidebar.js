@@ -1,9 +1,6 @@
 import Card from './Card';
 import Navigator from './Navigator';
 import { useNavigate } from 'react-router-dom';
-import { DemandsComponent } from '../DemandsComponent/index';
-import { ClientsComponent } from '../ClientsComponent/index';
-import { DatesComponent } from '../DatesComponent/index';
 import { Box } from '@mui/material';
 import { HomeIcon } from '@mui/icons-material';
 import { Links } from '../../types/enums';
@@ -17,9 +14,6 @@ function Sidebar() {
         <Navigator />
       </Box>
       <Box sx={{height: '75%'}}>
-        <DemandsComponent />
-        <ClientsComponent />
-        <DatesComponent />
       </Box>
     </div>
   )

@@ -10,7 +10,7 @@ function Sidebar() {
   return (
     <div style={{width: '100%', height: '100%', backgroundColor: '#131E2F'}}>
       <Box sx={{height: '25%'}}>
-        <HomeIcon color="primary" sx={{ fontSize: 50 }} onClick={navigate(Links.Upload)} />
+        {/* <HomeIcon color="primary" sx={{ fontSize: 50 }} onClick={navigate(Links.Upload)} /> */}
         <Navigator />
       </Box>
       <Box sx={{height: '75%'}}>

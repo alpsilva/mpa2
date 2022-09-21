@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useLocation } from "react-router-dom";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import DFG from "../../Components/DFG/DFG";
@@ -19,6 +20,7 @@ function SVGConditional(exibicao, freqSVG, perfSVG) {
 }
 export default function FilterScreen() {
   const location = useLocation();
+  const [exibicao, setExibicao] = useState(location.state.props.filters.exibicao.slice())
   const data = location.state.props;
   const freqSVG = data.freq_svg;
   const perfSVG = data.perf_svg;
@@ -55,12 +57,12 @@ export default function FilterScreen() {
             justifyContent: "space-around",
           }}
         >
-          <ExibitionTable exibitionProps={data.filters.exibicao} />
+          <ExibitionTable exibitionProps={exibicao} setExibicao={setExibicao} />
           <DetailsTable detailsTableProps={mock.detalhes} />
           <StatisticsTable statisticsProp={data.stats} />
         </Box>
         <Box sx={{ height: "75%", display: "flex" }}>
-          {SVGConditional(data.exibicao, freqSVG, perfSVG)}
+          {SVGConditional(exibicao, freqSVG, perfSVG)}
           <a href={perfSVG} download>
             <button>Download Perfomace</button>
           </a>

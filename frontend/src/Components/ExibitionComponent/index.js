@@ -2,11 +2,12 @@ import { Box, Typography, FormControl, RadioGroup, FormControlLabel, Radio } fro
 import './style.css';
 import { useState } from 'react';
 
-const ExibitionTable = ({exibitionProps}) => {
-  const [ exibitionState, setExibitionState] = useState('frequencia');
+const ExibitionTable = ({exibitionProps, setExibicao}) => {
+  const [ exibitionState, setExibitionState] = useState(exibitionProps);
 
   const handleChange = (event) =>{
     setExibitionState(event.target.value);
+    setExibicao(event.target.value)
   }
     return (
         <Box sx={{width: "20%", height: "60%", backgroundColor: "#131E2F",}}>

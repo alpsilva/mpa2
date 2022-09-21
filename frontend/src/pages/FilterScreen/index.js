@@ -61,6 +61,12 @@ export default function FilterScreen() {
         </Box>
         <Box sx={{ height: "75%", display: "flex" }}>
           {SVGConditional(data.exibicao, freqSVG, perfSVG)}
+          <a href={perfSVG} download>
+            <button>Download Perfomace</button>
+          </a>
+          <a href={freqSVG} download>
+            <button>Download Frequência</button>
+          </a>
         </Box>
       </Box>
     </Box>

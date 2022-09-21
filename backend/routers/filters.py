@@ -1,3 +1,4 @@
+import datetime
 from fastapi import APIRouter
 from pydantic import BaseModel
 import pm4py
@@ -5,7 +6,7 @@ from pm4py.objects.log.obj import EventLog
 
 from internal.filters import filter_log_by_demand, get_standard_client, get_standard_demanda, get_demandas
 
-from internal.read_file import get_logs
+from internal.read_file import get_logs, save_log, save_filtered_log
 
 router = APIRouter(
     prefix="/bob/filter", #rota a ser definida pelo
@@ -33,6 +34,7 @@ async def filter_by_client(request: FilterInput):
             if cliente == request.input:
                 filtered_log.append(trace)
 
+    save_filtered_log(filtered_log)
     return len(filtered_log)
 
 
@@ -42,16 +44,17 @@ async def filter_by_demanda(request: FilterInput):
     
     if request.input in get_demandas(log):
         filtered_log = pm4py.filter_event_attribute_values(log, "tp_demanda", [request.input], level="event", retain=True)
+        
+        save_filtered_log(filtered_log)
         return len(filtered_log)
     else:
         request.input = get_standard_demanda(log)
         filtered_log = pm4py.filter_event_attribute_values(log, "tp_demanda", [request.input], level="event", retain=True)
+        
+        save_filtered_log(filtered_log)
         return len(filtered_log)
    
     
-
-
-import datetime
 
 @router.post("/data")
 async def filter_by_data(dataInicial = "", dataFinal = ""):    
@@ -73,5 +76,7 @@ async def filter_by_data(dataInicial = "", dataFinal = ""):
             filtered_log.append(trace)
     if (len(filtered_log) < 1):
         return len(log)
+
+    save_filtered_log(filtered_log)
 
     return len(filtered_log)

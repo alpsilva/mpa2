@@ -18,6 +18,12 @@ def listar_demanda(log):
           } 
         eventos[tarefa]['quantidade'] += 1 
         eventos[tarefa]['tempo'] += event['dt_fim'] - event['dt_inicio'] 
+      
+        eventos[tarefa]['media'] = 0
+        if eventos[tarefa]['quantidade'] > 0:
+          eventos[tarefa]['media'] = eventos[tarefa]['tempo'] / eventos[tarefa]['quantidade']
       obj ['atividades'] = eventos 
-      response.append(obj) 
+
+      response.append(obj)
+
     return response

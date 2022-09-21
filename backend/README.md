@@ -3,5 +3,5 @@ Repositório para a implementação de ferramenta de mineração de processos pa
 
 # How to run the backend
 ```bash
-docker build -t bob . && docker run -d --name bob_container -p 8081:8081 bob
+docker build -t bob . && docker run --rm -d --name bob_container -p 8081:8081 bob
 ```

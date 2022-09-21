@@ -6,6 +6,8 @@ from internal.filters import filter_log_by_demand, get_standard_client, get_stan
 from internal.visualization import generate_svg
 from internal.stats import get_log_statistics
 
+from pm4py.objects.log.log import EventLog
+
 LOGS = None
 FILTERED_LOG = None
 
@@ -62,3 +64,9 @@ def read_local_logs():
 
 def get_logs():
     return copy.deepcopy(LOGS)
+
+def save_log(log: EventLog):
+    LOGS = copy.deepcopy(log)
+
+def save_filtered_log(log: EventLog):
+    FILTERED_LOG = copy.deepcopy(log)

@@ -8,7 +8,7 @@ import DetailsTable from "../../Components/DetailsComponent";
 import ExibitionTable from "../../Components/ExibitionComponent";
 import DemandsTable from "../../Components/DemandsComponent";
 import ClientsTable from "../../Components/ClientsComponent";
-import DatesTable from "../../Components/ClientsComponent";
+import DatesTable from "../../Components/DatesComponent";
 import { Box } from "@mui/material";
 import mock from "../../mock.json";
 
@@ -20,7 +20,18 @@ function SVGConditional(exibicao, freqSVG, perfSVG) {
 }
 export default function FilterScreen() {
   const location = useLocation();
+  console.log("location.state.props", location.state.props)
   const [exibicao, setExibicao] = useState(location.state.props.filters.exibicao.slice())
+  const [client, setClient] = useState("cliente1")
+  const [demand, setDemand] = useState("novoSistema")
+  const [startDate, setStartDate] = useState("auto")
+  const [endDate, setEndDate] = useState("auto")
+
+  console.log("client", client);
+  console.log("demand", demand);
+  console.log("startDate", startDate);
+  console.log("endDate", endDate);
+
   const data = location.state.props;
   const freqSVG = data.freq_svg;
   const perfSVG = data.perf_svg;
@@ -36,9 +47,9 @@ export default function FilterScreen() {
     >
       <Box sx={{ width: "30%", height: "100%" }}>
         <Sidebar>
-          <DemandsTable />
-          <ClientsTable />
-          <DatesTable />
+          <DemandsTable setDemand={setDemand}/>
+          <ClientsTable setClient={setClient}/>
+          <DatesTable setStartDate={setStartDate} setEndDate={setEndDate}/>
         </Sidebar>
         {/* <Sidebar cards={cards} /> */}
       </Box>

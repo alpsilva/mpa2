@@ -7,9 +7,9 @@ function Navigator() {
   return (
     <div>
       <div style={{ width: "100%" }}>
-        <Button variant="contained" onClick={navigate(Links.Filter)}>Filtros</Button>
-        <Button variant="contained" onClick={navigate(Links.Demands)}>Demandas</Button>
-        <Button variant="contained" onClick={navigate(Links.Activities)}>Tarefas</Button>
+        <Button variant="contained" onClick={()=>navigate(Links.Filter)}>Filtros</Button>
+        <Button variant="contained" onClick={()=>navigate(Links.Demands)}>Demandas</Button>
+        <Button variant="contained" onClick={()=>navigate(Links.Activities)}>Tarefas</Button>
         <Button variant='outlined'>Recursos</Button>
       </div>
     </div>

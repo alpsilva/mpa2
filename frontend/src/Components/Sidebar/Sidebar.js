@@ -1,8 +1,8 @@
-import Card from './Card';
+// import Card from './Card';
 import Navigator from './Navigator';
 import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
-import { HomeIcon } from '@mui/icons-material';
+import HomeIcon from '@mui/icons-material/Home';
 import { Links } from '../../types/enums';
 
 function Sidebar() {

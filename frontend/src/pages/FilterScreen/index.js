@@ -1,13 +1,13 @@
 import { useLocation } from "react-router-dom";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import DFG from "../../Components/DFG/DFG";
-import { cards } from "../../Components/Sidebar/Data";
+// import { cards } from "../../Components/Sidebar/Data";
 import StatisticsTable from "../../Components/StatisticsComponent";
 import DetailsTable from "../../Components/DetailsComponent";
 import ExibitionTable from "../../Components/ExibitionComponent";
-import DemandsTable from "../DemandsComponent";
-import ClientsTable from "../ClientsComponent";
-import DatesTable from "../DatesComponent";
+import DemandsTable from "../../Components/DemandsComponent";
+import ClientsTable from "../../Components/ClientsComponent";
+import DatesTable from "../../Components/ClientsComponent";
 import { Box } from "@mui/material";
 import mock from "../../mock.json";
 
@@ -38,7 +38,7 @@ export default function FilterScreen() {
           <ClientsTable />
           <DatesTable />
         </Sidebar>
-        <Sidebar cards={cards} />
+        {/* <Sidebar cards={cards} /> */}
       </Box>
       <Box
         sx={{

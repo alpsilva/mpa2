@@ -46,6 +46,14 @@ export default function FilterScreen() {
   const [endDate, setEndDate] = useState("auto")
   const isFirstRender = useRef(true);
 
+  const filters = useRef(
+    {
+      client: "cliente1",
+      demand: "novoSistema",
+      startDate: "auto",
+      endDate: "auto"
+    })
+
   const data = location.state.props;
   const freqSVG = data.freq_svg;
   const perfSVG = data.perf_svg;
@@ -59,29 +67,59 @@ export default function FilterScreen() {
   }, []);
 
   useEffect(() => {
-    const updateFilters = async (data) => {
-      await axios.post('//localhost:8081/bob/api/filter', data)
+    const filterByClient = async () => {
+      await axios.post('//localhost:8081/bob/filter/client', {cliente: client})
       .then((response) => {
-          navigate('/Filter', {state:{props: response.data}});
-
-          // data = response.data; // essas 3 linhas é só algo que quero testar, mas acho que não daria certo
-          // freqSVG = data.freq_svg;
-          // perfSVG = data.perfSVG
+          console.log("response", response)
+          // navigate('/Filter', {state:{props: response.data}});
       })
       .catch((e) => {
-          // toast.error('Upload Error');
           console.log("Deu ruim, hein!\n\n")
       })
     }
 
-    if(!isFirstRender.current) {
-    const data = {
-      client: client,
-      demand: demand,
-      startDate: startDate,
-      endDate: endDate
+    const filterByDemand = async () => {
+      await axios.post('//localhost:8081/bob/filter/demanda', {demanda: demand})
+      .then((response) => {
+          console.log("response", response)
+          // navigate('/Filter', {state:{props: response.data}});
+      })
+      .catch((e) => {
+          console.log("Deu ruim, hein!\n\n")
+      })
     }
-    updateFilters(data)
+
+    const filterByDate = async () => {
+      await axios.post('//localhost:8081/bob/filter/data', {dataInicial: startDate, dataFinal: endDate})
+      .then((response) => {
+        console.log("response", response)
+          // navigate('/Filter', {state:{props: response.data}});
+      })
+      .catch((e) => {
+          console.log("Deu ruim, hein!\n\n")
+      })
+    }
+
+    const updateFilters = () => {
+      filters.current = {
+        client: client,
+        demand: demand,
+        startDate: startDate,
+        endDate: endDate
+      }
+    }
+
+    if(!isFirstRender.current) {
+      if(filters.current.client !== client) {
+        updateFilters()
+        filterByClient()
+      } else if (filters.current.demand !== demand) {
+        updateFilters()
+        filterByDemand()
+      } else {
+        updateFilters()
+        filterByDate()
+      }
     } else {
       isFirstRender.current = false;
     }

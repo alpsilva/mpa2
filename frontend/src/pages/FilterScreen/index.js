@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import {useState, useEffect, useRef, useCallback} from 'react';
 import { useLocation } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import Sidebar from "../../Components/Sidebar/Sidebar";
@@ -13,12 +13,27 @@ import DatesTable from "../../Components/DatesComponent";
 import { Box } from "@mui/material";
 import mock from "../../mock.json";
 import axios from 'axios';
+import SVG from "react-inlinesvg";
+
 
 function SVGConditional(exibicao, freqSVG, perfSVG) {
   if (exibicao === "frequencia") {
-    return <DFG DFGProps={freqSVG} />;
+    return <SVG src={freqSVG} />;
   }
-  return <DFG DFGProps={perfSVG} />;
+  return <SVG src={perfSVG} />;
+}
+
+function downloadBlob(blob, filename) {
+  const objectUrl = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = objectUrl;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  setTimeout(() => URL.revokeObjectURL(objectUrl), 5000);
 }
 export default function FilterScreen() {
   const navigate = useNavigate();
@@ -34,6 +49,14 @@ export default function FilterScreen() {
   const data = location.state.props;
   const freqSVG = data.freq_svg;
   const perfSVG = data.perf_svg;
+
+  const svgRef = useRef();
+
+  const downloadSVG = useCallback(() => {
+    const svg = svgRef.current.innerHTML;
+    const blob = new Blob([svg], { type: "image/svg+xml" });
+    downloadBlob(blob, `myimage.svg`);
+  }, []);
 
   useEffect(() => {
     const updateFilters = async (data) => {
@@ -101,13 +124,12 @@ export default function FilterScreen() {
           <StatisticsTable statisticsProp={data.stats} />
         </Box>
         <Box sx={{ height: "75%", display: "flex" }}>
-          {SVGConditional(exibicao, freqSVG, perfSVG)}
-          <a href={perfSVG} download>
-            <button>Download Perfomace</button>
-          </a>
-          <a href={freqSVG} download>
-            <button>Download Frequência</button>
-          </a>
+          <div ref={svgRef}>
+            {exibicao === "frequencia" && <SVG width={1280} height={700} src={freqSVG}/>}
+            {exibicao !== "frequencia" && <SVG width={1280} height={700} src={perfSVG}/>}
+          </div>
+
+          <button onClick={downloadSVG}>Download Perfomace</button>
         </Box>
       </Box>
     </Box>

@@ -16,10 +16,10 @@ export default function DatesTable({ setStartDate, setEndDate }) {
 
   return (
     <Box sx={{ width: "100%", height: "33%" }}>
-      <Box sx={{ width: '45%', borderRadius: '15px', backgroundColor: '#BCCADA' }}>
-        <Typography >Datas</Typography>
+      <Box sx={{ width: '45%', maxWidth: '200px', borderRadius: '15px', backgroundColor: '#BCCADA', margin: "auto" }}>
+        <Typography sx={{ textAlign: "center", fontWeight: "bold" }}>Datas</Typography>
       </Box>
-      <Box>
+      <Box sx={{ paddingLeft: "10px"}}>
         <Box mt={"12px"}>
           <Typography sx={{ color: 'white' }} >Início</Typography>
           <input type="date" onChange={handleStartDateChange} id="start" name="start"/>

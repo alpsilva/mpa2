@@ -20,7 +20,7 @@ function SVGConditional(exibicao, freqSVG, perfSVG) {
   }
   return <DFG DFGProps={perfSVG} />;
 }
-export default function FilterScreen(props) {
+export default function FilterScreen() {
   const navigate = useNavigate();
   const location = useLocation();
 

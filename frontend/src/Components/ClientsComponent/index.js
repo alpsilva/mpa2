@@ -9,11 +9,11 @@ export default function ClientsTable({setClient}) {
     setClient(event.target.value);
   }
   return (
-    <Box sx={{ width: "100%", height: "33%",  marginBottom: "80px"}}>
-      <Box sx={{ width: '45%', height: '24px', borderRadius: '15px', backgroundColor: '#BCCADA'}}>
-        <Typography>Clientes</Typography>
+    <Box sx={{ width: "100%", height: "33%",  marginBottom: "70px"}}>
+      <Box sx={{ width: '45%', maxWidth: '200px', height: '24px', borderRadius: '15px', backgroundColor: '#BCCADA', margin: "auto"}}>
+        <Typography sx={{ textAlign: "center", fontWeight: "bold" }}>Clientes</Typography>
       </Box>
-      <Box>
+      <Box sx={{ paddingLeft: "10px"}}>
         <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"
           value={selectedClient}

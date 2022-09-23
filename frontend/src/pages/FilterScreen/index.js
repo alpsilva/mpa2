@@ -122,16 +122,21 @@ export default function FilterScreen() {
           <ExibitionTable exibitionProps={exibicao} setExibicao={setExibicao} />
           <DetailsTable detailsTableProps={mock.detalhes} />
           <StatisticsTable statisticsProp={data.stats} />
+          <div><button onClick={downloadSVG}>Download Perfomace</button></div>
         </Box>
         <Box sx={{ height: "75%", display: "flex" }}>
           <div ref={svgRef}>
             {exibicao === "frequencia" && <SVG width={1280} height={700} src={freqSVG}/>}
             {exibicao !== "frequencia" && <SVG width={1280} height={700} src={perfSVG}/>}
           </div>
-
-          <button onClick={downloadSVG}>Download Perfomace</button>
+          
+          
+          
         </Box>
+        
       </Box>
+     
     </Box>
+    
   );
 }

@@ -16,6 +16,8 @@ async def filter_by_client():
 
     table = listar_demanda(log)
 
-    return table
+    ordered_table = sorted(table, key = lambda d: d['duracao_total'], reverse=True)
+
+    return ordered_table
 
 

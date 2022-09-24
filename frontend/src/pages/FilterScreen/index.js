@@ -68,10 +68,10 @@ export default function FilterScreen() {
 
   useEffect(() => {
     const filterByClient = async () => {
-      await axios.post('//localhost:8081/bob/filter/client', {cliente: client})
+      await axios.post('//localhost:8081/bob/filter/client', {input: client})
       .then((response) => {
           console.log("response", response)
-          // navigate('/Filter', {state:{props: response.data}});
+          navigate('/Filter', {state:{props: response.data}});
       })
       .catch((e) => {
           console.log("Deu ruim, hein!\n\n")
@@ -79,10 +79,10 @@ export default function FilterScreen() {
     }
 
     const filterByDemand = async () => {
-      await axios.post('//localhost:8081/bob/filter/demanda', {demanda: demand})
+      await axios.post('//localhost:8081/bob/filter/demanda', {input: demand})
       .then((response) => {
           console.log("response", response)
-          // navigate('/Filter', {state:{props: response.data}});
+          navigate('/Filter', {state:{props: response.data}});
       })
       .catch((e) => {
           console.log("Deu ruim, hein!\n\n")

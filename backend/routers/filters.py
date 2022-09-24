@@ -1,5 +1,5 @@
-import datetime
-from fastapi import APIRouter
+from datetime import datetime
+from fastapi import APIRouter, status
 from pydantic import BaseModel
 import pm4py
 from pm4py.objects.log.obj import EventLog
@@ -16,10 +16,13 @@ router = APIRouter(
 class FilterInput(BaseModel):
     input: str
 
+class FilterDateInput(BaseModel):
+    dataInicial: str
+    dataFinal: str
+
 @router.post("/client")
 async def filter_by_client(request: FilterInput):  
     cliente_filter = request.input
-    print(cliente_filter)
     
     log = get_logs()
 
@@ -28,14 +31,13 @@ async def filter_by_client(request: FilterInput):
 
     if log_size == 0:
         print("log size 0.")
-        # abort 404
+        status.HTTP_404_NOT_FOUND
 
     return output
 
 @router.post("/demanda")
 async def filter_by_demanda(request: FilterInput):   
     demanda_filter = request.input
-    print(demanda_filter)
     
     log = get_logs()
 
@@ -44,27 +46,37 @@ async def filter_by_demanda(request: FilterInput):
 
     if log_size == 0:
         print("log size 0.")
-        # abort 404
+        status.HTTP_404_NOT_FOUND
 
     return output
 
 @router.post("/data")
-async def filter_by_data(dataInicial = "", dataFinal = ""):    
+async def filter_by_data(request: FilterDateInput):    
+    start_date = request.dataInicial
+    end_date = request.dataFinal
+
+    print(end_date, start_date)
+
+    ano = datetime.today().year
+    if (start_date == ""):        
+        start_date = datetime(ano, 1, 1)
+    else:
+        start_date = datetime.strptime(start_date, '%Y-%m-%d')
+    
+    if (end_date == ""):
+        end_date = datetime(ano, 12, 31)
+    else:
+        end_date = datetime.strptime(end_date, '%Y-%m-%d')
+    
+    print(end_date, start_date)
+
     log = get_logs()
-    ano = datetime.date.today().year
-    if (dataInicial == ""):        
-        dataInicial = datetime.date(ano, 1, 1)
-    else:
-        dataInicial = datetime.datetime.strptime(dataInicial, '%m-%d-%Y').date()
-    if (dataFinal == ""):
-        dataFinal = datetime.date(ano, 12, 31)
-    else:
-        dataFinal = datetime.datetime.strptime(dataFinal, '%m-%d-%Y').date()
     filtered_log = []    
-    print(dataFinal, dataInicial)
+
     for trace in log:
-        date_last_event = (trace[-1])["dt_fim"].date()    
-        if( dataInicial < date_last_event < dataFinal):
+        date_last_event = (trace[-1])["dt_fim"]
+        date_last_event = date_last_event.to_pydatetime()
+        if( start_date < date_last_event < end_date):
             filtered_log.append(trace)
     if (len(filtered_log) < 1):
         return len(log)

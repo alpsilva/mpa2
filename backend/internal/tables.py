@@ -27,6 +27,20 @@ def listar_demanda(log):
 
       response.append(obj)
 
+      for item in response:
+        total_duration = []
+        for tarefa in item['atividades']:
+            
+            total_duration.append(
+                item['atividades'][tarefa]['tempo']
+            )
+
+        total = 0
+        for duration in total_duration:
+            total += duration.total_seconds()
+
+        item['duracao_total'] = total
+
     return response
 
 def listar_atividades(demand : pm4py.objects.log.obj.Event, order : bool = False):

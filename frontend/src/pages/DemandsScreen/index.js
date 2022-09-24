@@ -18,16 +18,25 @@ import axios from "axios";
 
 export default function DemandsScreen() {
     async function getDemands() {
-        const response = await (await axios.get(''));
+        const response = await (await axios.get('//localhost:8081/bob/tables/demanda'));
         const { data } = response;
 
+        console.log(data);
+
         const newData = data.map((element) => ({
-            name: element.name,
-            first: element.first,
-            quantity: element.quantity,
-            total: element.total,
-            mean: element.mean, 
+            case_id: element.case_id,
+            cliente: element.cliente,
+            atividades: Object.keys(element.atividades).length,
+            duracao_total: element.duracao_total
         }));
+
+        // const newAtividade = data.map((element) => ({
+        //   nome_atividade: element.nome_atividade,
+        //   primeira_ocorrencia: element.primeira_ocorrencia,
+        //   quantidade: element.quantidade,
+        //   tempo: element.tempo,
+        //   media: element.media
+        // }));
 
         setRows(newData);
     }
@@ -37,11 +46,10 @@ export default function DemandsScreen() {
     }, []);
 
   const [rows, setRows] = useState([{
-    name: "",
-    first: "",
-    quantity: "",
-    total: 0,
-    mean: 0,
+    case_id: "",
+    cliente: "",
+    atividades: 0,
+    duracao_total: 0
   }]);
   return (
     <Box
@@ -69,8 +77,7 @@ export default function DemandsScreen() {
         <Box sx={{ margin: "0 10px" }}>
           <Accordion sx={{ margin: "10px 20px" }}>
             <AccordionSummary>
-              <Typography>Demanda 1</Typography>
-              <Typography sx={{ marginLeft: "auto" }}>Cliente 1</Typography>
+              <Typography>Demandas</Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Typography>Atividades:</Typography>
@@ -83,28 +90,26 @@ export default function DemandsScreen() {
                   >
                     <TableHead>
                       <TableRow>
-                        <TableCell>Nome</TableCell>
-                        <TableCell align="right">Primeira ocorrência</TableCell>
-                        <TableCell align="right">Quantidade</TableCell>
-                        <TableCell align="right">Tempo Total</TableCell>
-                        <TableCell align="right">Tempo médio</TableCell>
+                        <TableCell>case_id</TableCell>
+                        <TableCell align="right">Cliente</TableCell>
+                        <TableCell align="right">Atividades</TableCell>
+                        <TableCell align="right">Duração Total</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
                       {rows.map((row) => (
                         <TableRow
-                          key={row.name}
+                          key={row.case_id}
                           sx={{
                             "&:last-child td, &:last-child th": { border: 0 },
                           }}
                         >
                           <TableCell component="th" scope="row">
-                            {row.name}
+                            {row.case_id}
                           </TableCell>
-                          <TableCell align="right">{row.first}</TableCell>
-                          <TableCell align="right">{row.quantity}</TableCell>
-                          <TableCell align="right">{row.total}</TableCell>
-                          <TableCell align="right">{row.mean}</TableCell>
+                          <TableCell align="right">{row.cliente}</TableCell>
+                          <TableCell align="right">{row.atividades}</TableCell>
+                          <TableCell align="right">{row.duracao_total}</TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
@@ -113,7 +118,7 @@ export default function DemandsScreen() {
               </Box>
             </AccordionDetails>
           </Accordion>
-          <Accordion sx={{ margin: "10px 20px" }}>
+          {/* <Accordion sx={{ margin: "10px 20px" }}>
             <AccordionSummary>
               <Typography>Demanda 2</Typography>
               <Typography>Cliente 1</Typography>
@@ -154,7 +159,7 @@ export default function DemandsScreen() {
                 </TableContainer>
               </Box>
             </AccordionDetails>
-          </Accordion>
+          </Accordion> */}
         </Box>
       </Box>
     </Box>

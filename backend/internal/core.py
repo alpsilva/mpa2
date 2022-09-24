@@ -27,6 +27,9 @@ class Core:
                     start_date: datetime = None, end_date: datetime = None):
         log = self.log_cache.get_log()
 
+        if demanda_filter == "manutencaoEvolutiva": demanda_filter = "evolutiva"
+        if demanda_filter == "novoSistema": demanda_filter = "novo"
+
         filtered_log, output = filter_log(log, cliente_filter, demanda_filter, start_date, end_date)
 
         self.log_cache.save_filtered_log(filtered_log)
@@ -39,7 +42,7 @@ class Core:
 
         return table
 
-    def get_demandas_table(self):
+    def get_atividades_table(self):
         filtered_log = self.log_cache.get_filtered_log()
         table = listar_atividades(filtered_log)
 

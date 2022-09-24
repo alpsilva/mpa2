@@ -3,8 +3,8 @@ import pandas as pd
 import pm4py
 
 def read_logs(file):
-
-    df = pd.read_csv(file) 
+    columns_to_datetime = ['dt_inicio', 'dt_fim']
+    df = pd.read_csv(file, parse_dates=columns_to_datetime) 
     df = pm4py.format_dataframe(df, case_id="demanda_id", activity_key="tarefa", timestamp_key="dt_inicio")
     df = df.rename(columns={"cliente": "case:cliente"})    
     logs = pm4py.convert_to_event_log(df)

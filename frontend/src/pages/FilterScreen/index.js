@@ -42,16 +42,16 @@ export default function FilterScreen() {
   const [exibicao, setExibicao] = useState(location.state.props.filters.exibicao.slice())
   const [client, setClient] = useState("cliente1")
   const [demand, setDemand] = useState("novoSistema")
-  const [startDate, setStartDate] = useState("auto")
-  const [endDate, setEndDate] = useState("auto")
+  const [startDate, setStartDate] = useState("")
+  const [endDate, setEndDate] = useState("")
   const isFirstRender = useRef(true);
 
   const filters = useRef(
     {
       client: "cliente1",
       demand: "novoSistema",
-      startDate: "auto",
-      endDate: "auto"
+      startDate: "",
+      endDate: ""
     })
 
   const data = location.state.props;

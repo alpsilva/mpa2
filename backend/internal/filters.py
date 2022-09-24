@@ -23,7 +23,6 @@ def filter_log_by_data(log: EventLog, start_date: datetime, end_date: datetime):
     
     for trace in log:
         date_last_event = (trace[-1])["dt_fim"]
-        date_last_event = date_last_event.to_pydatetime()
         if( start_date < date_last_event < end_date):
             filtered_log.append(trace)
     if (len(filtered_log) < 1):

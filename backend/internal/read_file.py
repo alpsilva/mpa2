@@ -1,3 +1,4 @@
+from multiprocessing import Event
 import pandas as pd
 import pm4py
 import copy
@@ -23,36 +24,9 @@ def read_logs(file):
     default_cliente = get_standard_client(LOGS)
     default_demanda = get_standard_demanda(LOGS)
 
-    FILTERED_LOG = filter_log_by_cliente(LOGS, default_cliente)
+    output = filter_log(LOGS, default_cliente, default_demanda)
 
-    FILTERED_LOG = filter_log_by_demand(FILTERED_LOG, default_demanda)
-
-    freq_dfg_file_path, perf_dfg_file_path = generate_svg(FILTERED_LOG)
-
-    with open(freq_dfg_file_path, encoding='utf-8') as file:
-        freq_dfg_str = "".join(file.read().splitlines())
-
-    with open(perf_dfg_file_path, encoding='utf-8') as file:
-        perf_dfg_str = "".join(file.read().splitlines())
-
-    stats = get_log_statistics(FILTERED_LOG)
-
-    return {
-        "filters": {
-            "cliente": default_cliente,
-            "demanda": default_demanda,
-            "exibicao": "frequencia"
-        },
-
-        "stats": stats,
-
-        "detalhes": {
-            "logSize": len(FILTERED_LOG)
-        },
-
-        "freq_svg": freq_dfg_str,
-        "perf_svg": perf_dfg_str
-    }
+    return output
 
 def read_local_logs():
     global LOGS
@@ -61,6 +35,42 @@ def read_local_logs():
     file.close() 
     df = pm4py.format_dataframe(df, case_id="demanda_id", activity_key="tarefa", timestamp_key="dt_inicio")    
     LOGS = pm4py.convert_to_event_log(df)
+
+def filter_log(log: EventLog, cliente_filter: str = None, demanda_filter: str = None):
+    if cliente_filter is not None:
+        log = filter_log_by_cliente(log, cliente_filter)
+
+    if demanda_filter is not None:
+        log = filter_log_by_demand(log, demanda_filter)
+
+    freq_dfg_file_path, perf_dfg_file_path = generate_svg(log)
+
+    with open(freq_dfg_file_path, encoding='utf-8') as file:
+        freq_dfg_str = "".join(file.read().splitlines())
+
+    with open(perf_dfg_file_path, encoding='utf-8') as file:
+        perf_dfg_str = "".join(file.read().splitlines())
+
+    stats = get_log_statistics(log)
+
+    save_filtered_log(log)
+
+    return {
+        "filters": {
+            "cliente": cliente_filter,
+            "demanda": demanda_filter,
+            "exibicao": "frequencia"
+        },
+
+        "stats": stats,
+
+        "detalhes": {
+            "logSize": len(log)
+        },
+
+        "freq_svg": freq_dfg_str,
+        "perf_svg": perf_dfg_str
+    }
 
 def get_logs():
     return copy.deepcopy(LOGS)

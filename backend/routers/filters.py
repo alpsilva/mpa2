@@ -6,7 +6,7 @@ from pm4py.objects.log.obj import EventLog
 
 from internal.filters import filter_log_by_demand, get_standard_client, get_standard_demanda, get_demandas
 
-from internal.read_file import get_logs, save_log, save_filtered_log
+from internal.read_file import get_logs, save_log, save_filtered_log, filter_log
 
 router = APIRouter(
     prefix="/bob/filter", #rota a ser definida pelo
@@ -17,44 +17,36 @@ class FilterInput(BaseModel):
     input: str
 
 @router.post("/client")
-async def filter_by_client(request: FilterInput):   
-    filtered_log = []
+async def filter_by_client(request: FilterInput):  
+    cliente_filter = request.input
+    print(cliente_filter)
+    
     log = get_logs()
 
-    for trace in log:
-        cliente = trace.attributes['cliente']
-        if cliente == request.input:
-            filtered_log.append(trace)
-    # se não retornar valor vai default      
-    if (len(filtered_log) < 1):
-        filtered_log = []
-        request.input = get_standard_client(log)
-        for trace in log:
-            cliente = trace.attributes['cliente']
-            if cliente == request.input:
-                filtered_log.append(trace)
+    output = filter_log(log, cliente_filter=cliente_filter)
+    log_size = output['detalhes']['logSize']
 
-    save_filtered_log(filtered_log)
-    return len(filtered_log)
+    if log_size == 0:
+        print("log size 0.")
+        # abort 404
 
+    return output
 
 @router.post("/demanda")
 async def filter_by_demanda(request: FilterInput):   
+    demanda_filter = request.input
+    print(demanda_filter)
+    
     log = get_logs()
-    
-    if request.input in get_demandas(log):
-        filtered_log = pm4py.filter_event_attribute_values(log, "tp_demanda", [request.input], level="event", retain=True)
-        
-        save_filtered_log(filtered_log)
-        return len(filtered_log)
-    else:
-        request.input = get_standard_demanda(log)
-        filtered_log = pm4py.filter_event_attribute_values(log, "tp_demanda", [request.input], level="event", retain=True)
-        
-        save_filtered_log(filtered_log)
-        return len(filtered_log)
-   
-    
+
+    output = filter_log(log, demanda_filter=demanda_filter)
+    log_size = output['detalhes']['logSize']
+
+    if log_size == 0:
+        print("log size 0.")
+        # abort 404
+
+    return output
 
 @router.post("/data")
 async def filter_by_data(dataInicial = "", dataFinal = ""):    

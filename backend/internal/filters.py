@@ -1,5 +1,7 @@
 import pm4py
 from pm4py.objects.log.obj import EventLog
+from .stats import get_log_statistics
+from .visualization import generate_svg
 
 from datetime import datetime
 
@@ -29,7 +31,47 @@ def filter_log_by_data(log: EventLog, start_date: datetime, end_date: datetime):
 
     return filtered_log
 
-# Filtro cliente
+def filter_log(log: EventLog, cliente_filter: str = None, demanda_filter: str = None,
+                start_date: datetime = None, end_date: datetime = None):
+    
+    if start_date is not None and end_date is not None:
+        log = filter_log_by_data(log, start_date, end_date)
+    
+    if cliente_filter is not None:
+        log = filter_log_by_cliente(log, cliente_filter)
+
+    if demanda_filter is not None:
+        log = filter_log_by_demand(log, demanda_filter)
+
+    freq_dfg_file_path, perf_dfg_file_path = generate_svg(log)
+
+    with open(freq_dfg_file_path, encoding='utf-8') as file:
+        freq_dfg_str = "".join(file.read().splitlines())
+
+    with open(perf_dfg_file_path, encoding='utf-8') as file:
+        perf_dfg_str = "".join(file.read().splitlines())
+
+    stats = get_log_statistics(log)
+    
+    output = {
+        "filters": {
+            "cliente": cliente_filter,
+            "demanda": demanda_filter,
+            "exibicao": "frequencia"
+        },
+
+        "stats": stats,
+
+        "detalhes": {
+            "logSize": len(log)
+        },
+
+        "freq_svg": freq_dfg_str,
+        "perf_svg": perf_dfg_str
+    }
+
+    return log, output
+
 def get_standard_client(log):
     clientes_count = {}
     for trace in log:
@@ -39,8 +81,6 @@ def get_standard_client(log):
         clientes_count[cliente] += 1
     max_key = max(clientes_count, key = clientes_count.get)
     return max_key
-
-# filtro demanda
 
 def get_standard_demanda(log):
     demandas = pm4py.get_event_attribute_values(log, "tp_demanda")

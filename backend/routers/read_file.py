@@ -1,8 +1,7 @@
 from traceback import print_exc
 from fastapi import UploadFile, APIRouter
 
-from internal.read_file import read_logs, read_local_logs, get_logs
-from internal import read_file
+from .config import get_core
 
 router = APIRouter(
     prefix="/bob/api", #rota a ser definida pelo
@@ -13,7 +12,7 @@ router = APIRouter(
 @router.post("/upload")
 async def upload_csv(file: UploadFile):
     try:
-        r = read_logs(file.file)
+        r = get_core().read_csv(file.file)
     except:
         print_exc()
         r = {}
@@ -24,13 +23,9 @@ async def upload_csv():
     try:
         file_path = "./internal/log_teste.csv"
         file = open(file_path)
-        r = read_logs(file)
+        r = get_core().read_csv(file)
         file.close()
     except:
         print_exc()
         r = {}
     return r
-
-@router.get("/check")
-async def check_logs(n: int):
-    return get_logs()[n]

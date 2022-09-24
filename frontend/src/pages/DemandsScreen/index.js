@@ -21,8 +21,6 @@ export default function DemandsScreen() {
         const response = await (await axios.get('//localhost:8081/bob/tables/demanda'));
         const { data } = response;
 
-        console.log(data);
-
         const newData = data.map((element) => ({
             case_id: element.case_id,
             cliente: element.cliente,

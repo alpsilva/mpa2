@@ -17,3 +17,5 @@ const LoadingPopup = (props: LoadingPopupProps) => {
         </div>
     )
 }
+
+export default LoadingPopup;

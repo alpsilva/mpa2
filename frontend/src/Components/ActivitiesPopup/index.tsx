@@ -13,7 +13,7 @@ const ActivitiesPopup = (props: ActivitiesPopupProps) => {
     const {nomeAtividade, recursoExecutor, dataInicio, dataTermino, duracaoAtividade} = props;
     return(
         <div style={{backgroundColor: '#f2f0f0', borderRadius: '15px', width: '15%', minWidth: '300px', height: '10%', maxHeight: '150px', padding: '2%'}}>
-            <Typography variant='h6' color='#262626'>
+            <Typography variant='h6' color='#262626' align='left' paragraph={true}>
                 Nome da Atividade: {nomeAtividade}
                 Recurso que executou: {recursoExecutor}
                 Data de Inicio: {dataInicio}

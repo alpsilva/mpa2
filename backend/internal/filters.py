@@ -71,6 +71,27 @@ def filter_log(log: EventLog, cliente_filter: str = None, demanda_filter: str = 
 
     return log, output
 
+def filter_to_simplified_log(log, level, by_top=True):
+    """
+    Simplifies a log by taking out unpopular variantes.
+
+    Parameters:
+        log    (pm4py.objects.log) : Log
+        level  (int)               : 3,5,7,9 or 12; 3 "muito baixo"; 12 "muito alto"
+                                     in the case of by_top=False, percentage
+        by_top (bool)              : If the filtering will be by the top apearances 
+                                     instead of percentage cut
+    Returns:
+        filtered_log  (pm4py.objects.log) : Simplified log
+    """
+    # Filtering by top k apearences (default)
+    if by_top:
+        filtered_log = pm4py.filter_variants_top_k(log, level)
+        return filtered_log
+    # Filter by percentage 
+    filtered_log = pm4py.filter_variants_by_coverage_percentage(log, level)
+    return filtered_log
+
 def get_standard_client(log):
     clientes_count = {}
     for trace in log:
@@ -89,3 +110,4 @@ def get_standard_demanda(log):
 def get_demandas(log):
     demandas = pm4py.get_event_attribute_values(log, "tp_demanda")
     return demandas
+

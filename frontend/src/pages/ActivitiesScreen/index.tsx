@@ -2,70 +2,93 @@ import { Box } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useState, useEffect } from "react";
 import Sidebar from "../../Components/Sidebar/Sidebar";
+import axios from "axios";
 
 export default function ActivitiesScreen() {
   const [pageSize, setPageSize] = useState<number>(20);
-  // const [rows, setRows] = useState([{
-  //   nomeAtividade: '',
-  //   recursoExecutor: '',
-  //   dataInicio: '',
-  //   dataFinal: '',
-  //   duracao: 0
-  // }]);
 
-  const rows = [
+  const [rows, setRows] = useState([
     {
-      nomeAtividade: "Sei la",
-      recursoExecutor: "Ricardo",
-      dataInicio: "01/01/1800",
-      dataFinal: "02/02/2022",
-      duracao: 10000,
+      quantidadeAtividades: 0,
+      frequenciaMinima: 0,
+      frequenciaMaxima: 0,
+      duracaoMinima: 0,
+      duracaoMaxima: 0,
     },
-  ];
+  ]);
 
   const columns: GridColDef[] = [
     {
-      field: "nomeAtividade",
-      headerName: "Nome da Atividade",
+      field: "quantidadeAtividades",
+      headerName: "Quantidade de Atividades",
       flex: 15,
-      description: "Nome da Atividade",
+      description: "",
     },
     {
-      field: "recursoExecutor",
-      headerName: "Recurso Executor",
+      field: "frequenciaMinima",
+      headerName: "Frequência Mínima",
       flex: 10,
-      description: "Recurso que executou a atividade",
+      description: "O número mínimo de vezes que uma atividade se repetiu.",
     },
     {
-      field: "dataInicio",
-      headerName: "Data Inicial",
+      field: "frequenciaMaxima",
+      headerName: "Frequência Máxima",
       flex: 10,
-      description: "Data inicial da ativiade",
+      description: "O número máximo de vezes que uma atividade se repetiu.",
     },
     {
-      field: "dataFinal",
-      headerName: "Data de Término",
+      field: "duracaoMinima",
+      headerName: "Duração Mínima",
       flex: 10,
-      description: "Data de término da ativiade",
+      description: "O mínimo de tempo que uma atividade durou.",
     },
     {
-      field: "duracao",
-      headerName: "Duração total",
-      flex: 8,
-      valueFormatter(params) {
-        return `${params.value} segundos`;
-      },
-      description: "Duração total da ativiade em segundos",
+      field: "duracaoMaxima",
+      headerName: "Duração Máxima",
+      flex: 10,
+      description: "O máximo de tempo que uma atividade durou.",
     },
   ];
 
+  async function getActivities() {
+    const response = await axios.get('');
+    const { data } = response;
+
+    const newData = data.map((element : any) => ({
+      quantidadeAtividades: element.quantidadeAtividades,
+      frequenciaMinima: element.frequenciaMinima,
+      frequenciaMaxima: element.frequenciaMaxima,
+      duracaoMinima: element.duracaoMinima,
+      duracaoMaxima: element.duracaoMaxima,
+    }));
+    setRows(newData);
+  }
+
+  useEffect(()=>{
+    getActivities();
+  },[]);
+
   return (
-    <div style={{ width: "100%", height: "100vh", backgroundColor: "#BCCADA", }}>
+    <div style={{ width: "100%", height: "100vh", backgroundColor: "#BCCADA" }}>
       <Box sx={{ width: "30vh", height: "100vh" }}>
         <Sidebar />
       </Box>
-      <Box sx={{ height: '100vh', display:'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <DataGrid rows={rows} columns={columns} pageSize={pageSize} onPageSizeChange={(newPageSize) => setPageSize(newPageSize)} rowsPerPageOptions={[10, 20, 40]} loading={true}  />
+      <Box
+        sx={{
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={pageSize}
+          onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+          rowsPerPageOptions={[10, 20, 40]}
+          loading={true}
+        />
       </Box>
     </div>
   );

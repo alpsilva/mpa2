@@ -18,7 +18,7 @@ import axios from "axios";
 
 export default function DemandsScreen() {
     async function getDemands() {
-        const response = await (await axios.get('//localhost:8081/bob/tables/demanda'));
+        const response = await axios.get('//localhost:8081/bob/tables/demanda');
         const { data } = response;
 
         const newData = data.map((element) => ({

@@ -27,15 +27,6 @@ export default function DemandsScreen() {
             atividades: Object.keys(element.atividades).length,
             duracao_total: element.duracao_total
         }));
-
-        // const newAtividade = data.map((element) => ({
-        //   nome_atividade: element.nome_atividade,
-        //   primeira_ocorrencia: element.primeira_ocorrencia,
-        //   quantidade: element.quantidade,
-        //   tempo: element.tempo,
-        //   media: element.media
-        // }));
-
         setRows(newData);
     }
 

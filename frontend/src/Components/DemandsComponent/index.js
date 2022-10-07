@@ -1,8 +1,8 @@
 import { Box, Typography, RadioGroup, FormControlLabel, Radio } from "@mui/material";
 import { useState } from 'react';
 
-export default function DemandsTable({ setDemand }) {
-  const [selectedDemand, setSelectedDemand] = useState('novoSistema');
+export default function DemandsTable({ demand, setDemand }) {
+  const [selectedDemand, setSelectedDemand] = useState(demand === 'evolutiva'? 'manutencaoEvolutiva': demand);
 
   const handleChange = (event) => {
     setSelectedDemand(event.target.value);
@@ -11,7 +11,7 @@ export default function DemandsTable({ setDemand }) {
 
   return (
     <Box sx={{ width: "100%", height: "33%", marginBottom: "40px", marginTop: "20px"}}>
-      <Box sx={{ width: '45%', maxWidth: '200px', borderRadius: '15px', backgroundColor: '#BCCADA', margin: "auto" }}>
+      <Box sx={{ width: '45%', maxWidth: '200px', borderRadius: '15px', backgroundColor: '#BCCADA', marginLeft: "10px"}}>
         <Typography sx={{ textAlign: "center", fontWeight: "bold" }}>Tipos de demanda</Typography>
       </Box>
       <Box sx={{ paddingLeft: "10px"}}>

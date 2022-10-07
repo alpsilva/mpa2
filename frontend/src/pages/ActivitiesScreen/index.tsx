@@ -7,15 +7,7 @@ import axios from "axios";
 export default function ActivitiesScreen() {
   const [pageSize, setPageSize] = useState<number>(20);
 
-  const [rows, setRows] = useState([
-    {
-      quantidadeAtividades: 0,
-      frequenciaMinima: 0,
-      frequenciaMaxima: 0,
-      duracaoMinima: 0,
-      duracaoMaxima: 0,
-    },
-  ]);
+  const [rows, setRows] = useState([]);
 
   const columns: GridColDef[] = [
     {

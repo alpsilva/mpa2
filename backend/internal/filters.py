@@ -1,5 +1,6 @@
 import pm4py
 from pm4py.objects.log.obj import EventLog
+from pm4py.algo.filtering.dfg.dfg_filtering import filter_dfg_on_activities_percentage, filter_dfg_on_paths_percentage
 from .stats import get_log_statistics
 from .visualization import generate_svg
 
@@ -71,26 +72,43 @@ def filter_log(log: EventLog, cliente_filter: str = None, demanda_filter: str = 
 
     return log, output
 
-def filter_to_simplified_log(log, level, by_top=True):
+def filter_to_simplify_dfg(log : EventLog, percentage : float, on : str = "activities", category: str = "freq"):
     """
     Simplifies a log by taking out unpopular variantes.
 
     Parameters:
-        log    (pm4py.objects.log) : Log
-        level  (int)               : 3,5,7,9 or 12; 3 "muito baixo"; 12 "muito alto"
-                                     in the case of by_top=False, percentage
-        by_top (bool)              : If the filtering will be by the top apearances 
-                                     instead of percentage cut
+        log         (pm4py.objects.log) : Log
+        percentage  (float)             : Percentage of activities (0 to 1)
+        on          (str)               : activities or paths
+        category    (str)               : freq or perf
     Returns:
-        filtered_log  (pm4py.objects.log) : Simplified log
+        f_dfg, f_start_activities, f_end_activities, f_activities_count 
+        : Resultados filtrados
     """
-    # Filtering by top k apearences (default)
-    if by_top:
-        filtered_log = pm4py.filter_variants_top_k(log, level)
-        return filtered_log
-    # Filter by percentage 
-    filtered_log = pm4py.filter_variants_by_coverage_percentage(log, level)
-    return filtered_log
+    # Getting dfg
+    if category=="freq":
+        dfg, start_activities, end_activities = pm4py.discover_dfg(log)
+    else:
+        dfg, start_activities, end_activities = pm4py.discover_performance_dfg(log)
+    # Creating count dict
+    activities_count = {}
+    for demanda in log:
+        for atividade in demanda:
+            name = atividade["tarefa"]
+            try:
+                activities_count[name] += 1
+            except:
+                activities_count[name] = 1
+    # Filter by percentage
+    if on=="activities":
+        f_dfg, f_start_activities, f_end_activities, f_activities_count = filter_dfg_on_activities_percentage(
+                dfg, start_activities, end_activities, activities_count, percentage
+            )
+    else:
+        f_dfg, f_start_activities, f_end_activities, f_activities_count = filter_dfg_on_paths_percentage(
+                dfg, start_activities, end_activities, activities_count, percentage
+            )
+    return f_dfg, f_start_activities, f_end_activities, f_activities_count 
 
 def get_standard_client(log):
     clientes_count = {}

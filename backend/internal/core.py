@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from .read_file import read_logs
-from .filters import  filter_log, get_standard_client, get_standard_demanda, filter_to_simplify_dfg
+from .filters import  filter_log, get_standard_client, get_standard_demanda
 from .tables import listar_demanda, listar_atividades
 
 from .log_cache import LogCache
@@ -10,14 +10,14 @@ class Core:
     def __init__(self):
         self.log_cache = LogCache()
 
-    def read_csv(self, file):
+    def read_csv(self, file, caminhos):
         log = read_logs(file)
         self.log_cache.save_log(log)
 
         default_cliente = get_standard_client(log)
         default_demanda = get_standard_demanda(log)
 
-        filtered_log, output = filter_log(log, default_cliente, default_demanda)
+        filtered_log, output = filter_log(log, caminhos, default_cliente, default_demanda)
 
         self.log_cache.save_filtered_log(filtered_log)
 

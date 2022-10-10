@@ -22,7 +22,7 @@ class NewFilterInput(BaseModel):
     demanda: str
     dataInicial: str
     dataFinal: str
-    caminhos: int
+    caminhos: str
     
 @router.post("/")
 async def filter(request: NewFilterInput):
@@ -30,7 +30,7 @@ async def filter(request: NewFilterInput):
     demanda = request.demanda
     start_date = request.dataInicial
     end_date = request.dataFinal
-    caminhos = request.caminhos
+    caminhos = int(request.caminhos)
 
     ano = datetime.today().year
     if (start_date == ""):        

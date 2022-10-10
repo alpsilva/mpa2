@@ -32,7 +32,6 @@ def filter_log_by_data(log: EventLog, start_date: datetime, end_date: datetime):
 
 def filter_log(log: EventLog, caminhos, cliente_filter: str = None, demanda_filter: str = None,
                 start_date: datetime = None, end_date: datetime = None):
-    percentage = (1 + caminhos) * 20 / 100
     if start_date is not None and end_date is not None:
         log = filter_log_by_data(log, start_date, end_date)
     
@@ -42,7 +41,8 @@ def filter_log(log: EventLog, caminhos, cliente_filter: str = None, demanda_filt
     if demanda_filter is not None:
         log = filter_log_by_demand(log, demanda_filter)
 
-    freq_dfg_file_path, perf_dfg_file_path = generate_svg(log)
+    percentage = (1 + caminhos) * 20 / 100
+    freq_dfg_file_path, perf_dfg_file_path = generate_svg(log, percentage)
 
     with open(freq_dfg_file_path, encoding='utf-8') as file:
         freq_dfg_str = "".join(file.read().splitlines())

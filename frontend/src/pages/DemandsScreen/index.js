@@ -24,10 +24,18 @@ export default function DemandsScreen() {
         const newData = data.map((element) => ({
             case_id: element.case_id,
             cliente: element.cliente,
-            atividades: Object.keys(element.atividades).length,
+            atividades: element.atividades.map((atividade) => ({
+                nome_atividade: atividade.nome,
+                primeira_ocorrencia: atividade.primeira_ocorrencia,
+                quantidade: atividade.quantidade,
+                tempo: atividade.tempo,
+                media: atividade.media
+            })),
             duracao_total: element.duracao_total
         }));
         setRows(newData);
+
+        console.log(newData)
     }
 
     useEffect(()=> {
@@ -63,94 +71,99 @@ export default function DemandsScreen() {
         <Box sx={{ paddingLeft: "10px", height: "10%" }}>
           <h1>Demandas</h1>
         </Box>
-        <Box sx={{ margin: "0 10px" }}>
-          <Accordion sx={{ margin: "10px 20px" }}>
-            <AccordionSummary>
-              <Typography>Demandas</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>Atividades:</Typography>
-              <Box>
-                <TableContainer component={Paper}>
-                  <Table
-                    sx={{ minWidth: 650 }}
-                    size="small"
-                    aria-label="a dense table"
-                  >
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>case_id</TableCell>
-                        <TableCell align="right">Cliente</TableCell>
-                        <TableCell align="right">Atividades</TableCell>
-                        <TableCell align="right">Duração Total</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {rows.map((row) => (
-                        <TableRow
-                          key={row.case_id}
-                          sx={{
-                            "&:last-child td, &:last-child th": { border: 0 },
-                          }}
-                        >
-                          <TableCell component="th" scope="row">
-                            {row.case_id}
-                          </TableCell>
-                          <TableCell align="right">{row.cliente}</TableCell>
-                          <TableCell align="right">{row.atividades}</TableCell>
-                          <TableCell align="right">{row.duracao_total}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Box>
-            </AccordionDetails>
-          </Accordion>
-          {/* <Accordion sx={{ margin: "10px 20px" }}>
-            <AccordionSummary>
-              <Typography>Demanda 2</Typography>
-              <Typography>Cliente 1</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>Atividades:</Typography>
-              <Box>
-                <TableContainer component={Paper}>
-                  <Table size="small">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Nome</TableCell>
-                        <TableCell align="right">Primeira ocorrência</TableCell>
-                        <TableCell align="right">Quantidade</TableCell>
-                        <TableCell align="right">Tempo Total</TableCell>
-                        <TableCell align="right">Tempo médio</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {rows.map((row) => (
-                        <TableRow
-                          key={row.name}
-                          sx={{
-                            "&:last-child td, &:last-child th": { border: 0 },
-                          }}
-                        >
-                          <TableCell component="th" scope="row">
-                            {row.name}
-                          </TableCell>
-                          <TableCell align="right">{row.first}</TableCell>
-                          <TableCell align="right">{row.quantity}</TableCell>
-                          <TableCell align="right">{row.total}</TableCell>
-                          <TableCell align="right">{row.mean}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Box>
-            </AccordionDetails>
-          </Accordion> */}
+        {/*<Box sx={{ margin: "0 10px" }}>*/}
+        {/*  <Accordion sx={{ margin: "10px 20px" }}>*/}
+        {/*    <AccordionSummary>*/}
+        {/*      <Typography>Demandas</Typography>*/}
+        {/*    </AccordionSummary>*/}
+        {/*    <AccordionDetails>*/}
+        {/*      <Typography>Atividades:</Typography>*/}
+        {/*      <Box>*/}
+        {/*        <TableContainer component={Paper}>*/}
+        {/*          <Table*/}
+        {/*            sx={{ minWidth: 650 }}*/}
+        {/*            size="small"*/}
+        {/*            aria-label="a dense table"*/}
+        {/*          >*/}
+        {/*            <TableHead>*/}
+        {/*              <TableRow>*/}
+        {/*                <TableCell>case_id</TableCell>*/}
+        {/*                <TableCell align="right">Cliente</TableCell>*/}
+        {/*                <TableCell align="right">Atividades</TableCell>*/}
+        {/*                <TableCell align="right">Duração Total</TableCell>*/}
+        {/*              </TableRow>*/}
+        {/*            </TableHead>*/}
+        {/*            <TableBody>*/}
+        {/*              {rows.map((row) => (*/}
+        {/*                <TableRow*/}
+        {/*                  key={row.case_id}*/}
+        {/*                  sx={{*/}
+        {/*                    "&:last-child td, &:last-child th": { border: 0 },*/}
+        {/*                  }}*/}
+        {/*                >*/}
+        {/*                  <TableCell component="th" scope="row">*/}
+        {/*                    {row.case_id}*/}
+        {/*                  </TableCell>*/}
+        {/*                  <TableCell align="right">{row.cliente}</TableCell>*/}
+        {/*                  <TableCell align="right">{row.atividades}</TableCell>*/}
+        {/*                  <TableCell align="right">{row.duracao_total}</TableCell>*/}
+        {/*                </TableRow>*/}
+        {/*              ))}*/}
+        {/*            </TableBody>*/}
+        {/*          </Table>*/}
+        {/*        </TableContainer>*/}
+        {/*      </Box>*/}
+        {/*    </AccordionDetails>*/}
+        {/*  Accordion*/}
+
+          {rows.map((row) => (
+              <Accordion sx={{ margin: "10px 20px" }}>
+                  <AccordionSummary>
+                      <Typography>Caso: {row.case_id}</Typography>
+                      <Typography>Cliente: {row.cliente}</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                      <Typography>Atividades:</Typography>
+                      <Box>
+                          <TableContainer component={Paper}>
+                              <Table size="small">
+                                  <TableHead>
+                                      <TableRow>
+                                          <TableCell>Nome</TableCell>
+                                          <TableCell align="right">Primeira ocorrência</TableCell>
+                                          <TableCell align="right">Quantidade</TableCell>
+                                          <TableCell align="right">Tempo Total</TableCell>
+                                          <TableCell align="right">Tempo médio</TableCell>
+                                      </TableRow>
+                                  </TableHead>
+                                  <TableBody>
+                                      {row.atividades.map((atividade) => (
+                                          <TableRow
+                                              key={atividade.nome}
+                                              sx={{
+                                                  "&:last-child td, &:last-child th": { border: 0 },
+                                              }}
+                                          >
+                                              <TableCell component="th" scope="row">
+                                                  {atividade.nome_atividade}
+                                              </TableCell>
+                                              <TableCell align="right">{atividade.primeira_ocorrencia}</TableCell>
+                                              <TableCell align="right">{atividade.quantidade}</TableCell>
+                                              <TableCell align="right">{atividade.tempo}</TableCell>
+                                              <TableCell align="right">{atividade.media}</TableCell>
+                                          </TableRow>
+                                      ))}
+                                  </TableBody>
+                              </Table>
+                          </TableContainer>
+                      </Box>
+                  </AccordionDetails>
+              </Accordion>
+              )
+          )}
+
         </Box>
-      </Box>
+      {/*</Box>*/}
     </Box>
   );
 }

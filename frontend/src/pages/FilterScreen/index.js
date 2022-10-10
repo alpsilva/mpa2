@@ -152,7 +152,7 @@ export default function FilterScreen() {
     console.log("request body:")
     await axios.post('//localhost:8081/bob/simplificacao')
     .then((response) => {
-      console.log("response", response)/
+      console.log("response", response)
         // navigate('/Filter', {state:{props: response.data}});
     })
     .catch((e) => {

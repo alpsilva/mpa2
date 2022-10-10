@@ -48,6 +48,9 @@ export default function FilterScreen() {
   const [endDate, setEndDate] = useState(data && data.filters && data.filters.dataFinal ? data.filters.dataFinal : "")
   const isFirstRender = useRef(true);
 
+  const [tarefas, setTarefas] = useState(5)
+  const [caminhos,setCaminhos] = useState(5)
+  
   const filters = useRef(
     {
       client: data && data.filters && data.filters.cliente ? data.filters.cliente : "cliente1",
@@ -144,7 +147,20 @@ export default function FilterScreen() {
         console.log("Deu ruim, hein!\n\n")
     })
   }
-
+  useEffect(() => {
+    const Detalhes = async () => {
+    console.log("request body:")
+    await axios.post('//localhost:8081/bob/simplificacao')
+    .then((response) => {
+      console.log("response", response)/
+        // navigate('/Filter', {state:{props: response.data}});
+    })
+    .catch((e) => {
+        console.log("Deu ruim, hein!\n\n")
+    })
+    
+  }
+ },[tarefas,caminhos])
   return (
     <Box
       sx={{
@@ -181,7 +197,7 @@ export default function FilterScreen() {
           }}
         >
           <ExibitionTable exibitionProps={exibicao} setExibicao={setExibicao} />
-          <DetailsTable detailsTableProps={mock.detalhes} />
+          <DetailsTable detailsTableProps={mock.detalhes} tarefas={tarefas} setTarefas={setTarefas} caminhos={caminhos} setCaminhos={setCaminhos}/>
           <StatisticsTable statisticsProp={data.stats} />
           <div><button onClick={downloadSVG}>Download Perfomace</button></div>
         </Box>

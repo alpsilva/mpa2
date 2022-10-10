@@ -48,8 +48,8 @@ export default function FilterScreen() {
   const [endDate, setEndDate] = useState(data && data.filters && data.filters.dataFinal ? data.filters.dataFinal : "")
   const isFirstRender = useRef(true);
 
-  const [tarefas, setTarefas] = useState(5)
-  const [caminhos,setCaminhos] = useState(5)
+  const [tarefas, setTarefas] = useState(4)
+  const [caminhos,setCaminhos] = useState(4)
   
   const filters = useRef(
     {
@@ -93,7 +93,10 @@ export default function FilterScreen() {
       demanda: filters.current.demand ? filters.current.demand : "novoSistema",
       dataInicial: filters.current.startDate ? filters.current.startDate : "",
       dataFinal: filters.current.endDate ? filters.current.endDate : "",
+      tarefas,
+      caminhos
     }
+
     console.log("request body:", body);
     await axios.post('//localhost:8081/bob/filter', body)
     .then((response) => {
@@ -104,20 +107,26 @@ export default function FilterScreen() {
         console.log("Deu ruim, hein!\n\n")
     })
   }
-  useEffect(() => {
-    const Detalhes = async () => {
-    console.log("request body:")
-    await axios.post('//localhost:8081/bob/simplificacao')
-    .then((response) => {
-      console.log("response", response)
-        // navigate('/Filter', {state:{props: response.data}});
-    })
-    .catch((e) => {
-        console.log("Deu ruim, hein!\n\n")
-    })
+//   useEffect(() => {
+//     const filterByDetails = async () => {
+//       console.log("request body:")
+//       const body = {
+//         tarefas,
+//         caminhos
+//       }
+//       await axios.post('//localhost:8081/bob/simplificacao', body)
+//       .then((response) => {
+//         console.log("response", response)
+//         navigate('/Filter', {state:{props: response.data}});
+//       })
+//       .catch((e) => {
+//           console.log("Deu ruim, hein!\n\n")
+//       })
     
-  }
- },[tarefas,caminhos])
+//     }
+//   filterByDetails();
+//  },[tarefas,caminhos, navigate])
+
   return (
     <Box
       sx={{

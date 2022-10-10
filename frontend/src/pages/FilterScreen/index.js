@@ -93,7 +93,7 @@ export default function FilterScreen() {
       demanda: filters.current.demand ? filters.current.demand : "novoSistema",
       dataInicial: filters.current.startDate ? filters.current.startDate : "",
       dataFinal: filters.current.endDate ? filters.current.endDate : "",
-      tarefas,
+      // tarefas,
       caminhos
     }
 

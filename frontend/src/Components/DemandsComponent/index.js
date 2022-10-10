@@ -2,7 +2,7 @@ import { Box, Typography, RadioGroup, FormControlLabel, Radio } from "@mui/mater
 import { useState } from 'react';
 
 export default function DemandsTable({ demand, setDemand }) {
-  const [selectedDemand, setSelectedDemand] = useState(demand === 'evolutiva'? 'manutencaoEvolutiva': demand);
+  const [selectedDemand, setSelectedDemand] = useState(demand);
 
   const handleChange = (event) => {
     setSelectedDemand(event.target.value);
@@ -20,8 +20,8 @@ export default function DemandsTable({ demand, setDemand }) {
           value={selectedDemand}
           onChange={handleChange}
         >
-          <FormControlLabel sx={{ color: 'white' }} value='novoSistema' control={<Radio />} label='Novo Sistema' />
-          <FormControlLabel sx={{ color: 'white' }} value='manutencaoEvolutiva' control={<Radio />} label='Manutenção Evolutiva' />
+          <FormControlLabel sx={{ color: 'white' }} value='novo' control={<Radio />} label='Novo Sistema' />
+          <FormControlLabel sx={{ color: 'white' }} value='evolutiva' control={<Radio />} label='Manutenção Evolutiva' />
         </RadioGroup>
       </Box>
     </Box>

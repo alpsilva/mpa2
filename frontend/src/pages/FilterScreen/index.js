@@ -54,7 +54,7 @@ export default function FilterScreen() {
   const filters = useRef(
     {
       client: data && data.filters && data.filters.cliente ? data.filters.cliente : "cliente1",
-      demand: data && data.filters && data.filters.demanda ? data.filters.demanda : "novoSistema",
+      demand: data && data.filters && data.filters.demanda ? data.filters.demanda : "novo",
       startDate: data && data.filters && data.filters.dataInicial ? data.filters.dataInicial : "",
       endDate: data && data.filters && data.filters.dataFinal ? data.filters.dataFinal : "",
     })
@@ -71,39 +71,6 @@ export default function FilterScreen() {
   }, []);
 
   useEffect(() => {
-    const filterByClient = async () => {
-      await axios.post('//localhost:8081/bob/filter/client', {input: client})
-      .then((response) => {
-          console.log("response", response)
-          navigate('/Filter', {state:{props: response.data}});
-      })
-      .catch((e) => {
-          console.log("Deu ruim, hein!\n\n")
-      })
-    }
-
-    const filterByDemand = async () => {
-      await axios.post('//localhost:8081/bob/filter/demanda', {input: demand})
-      .then((response) => {
-          console.log("response", response)
-          navigate('/Filter', {state:{props: response.data}});
-      })
-      .catch((e) => {
-          console.log("Deu ruim, hein!\n\n")
-      })
-    }
-
-    const filterByDate = async () => {
-      await axios.post('//localhost:8081/bob/filter/data', {dataInicial: startDate, dataFinal: endDate})
-      .then((response) => {
-        console.log("response", response)
-          // navigate('/Filter', {state:{props: response.data}});
-      })
-      .catch((e) => {
-          console.log("Deu ruim, hein!\n\n")
-      })
-    }
-
     const updateFilters = () => {
       filters.current = {
         client: client,
@@ -114,16 +81,6 @@ export default function FilterScreen() {
     }
 
     if(!isFirstRender.current) {
-      // if(filters.current.client !== client) {
-      //   updateFilters()
-      //   filterByClient()
-      // } else if (filters.current.demand !== demand) {
-      //   updateFilters()
-      //   filterByDemand()
-      // } else {
-      //   updateFilters()
-      //   filterByDate()
-      // }
       updateFilters()
     } else {
       isFirstRender.current = false;

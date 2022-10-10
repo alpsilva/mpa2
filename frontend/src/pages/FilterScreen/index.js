@@ -98,7 +98,7 @@ export default function FilterScreen() {
     await axios.post('//localhost:8081/bob/filter', body)
     .then((response) => {
       console.log("response", response)
-        // navigate('/Filter', {state:{props: response.data}});
+        navigate('/Filter', {state:{props: response.data}});
     })
     .catch((e) => {
         console.log("Deu ruim, hein!\n\n")

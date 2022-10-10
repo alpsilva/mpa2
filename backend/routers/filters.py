@@ -16,6 +16,41 @@ class FilterDateInput(BaseModel):
     dataInicial: str
     dataFinal: str
 
+
+class NewFilterInput(BaseModel):
+    cliente: str
+    demanda: str
+    dataInicial: str
+    dataFinal: str
+    
+@router.post("/")
+async def filter(request: NewFilterInput):
+    cliente = request.cliente
+    demanda = request.demanda
+    start_date = request.dataInicial
+    end_date = request.dataFinal
+
+    ano = datetime.today().year
+    if (start_date == ""):        
+        start_date = datetime(ano, 1, 1)
+    else:
+        start_date = datetime.strptime(start_date, '%Y-%m-%d')
+    
+    if (end_date == ""):
+        end_date = datetime(ano, 12, 31)
+    else:
+        end_date = datetime.strptime(end_date, '%Y-%m-%d')
+
+
+    output = get_core().filter_saved_log(cliente_filter=cliente, demanda_filter=demanda,start_date=start_date, end_date=end_date)
+    log_size = output['detalhes']['logSize']
+
+    if log_size == 0:
+        print("log size 0.")
+        status.HTTP_404_NOT_FOUND
+
+    return output
+
 @router.post("/client")
 async def filter_by_client(request: FilterInput):  
     cliente_filter = request.input

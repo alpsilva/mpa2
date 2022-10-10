@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from .read_file import read_logs
-from .filters import  filter_log, get_standard_client, get_standard_demanda
+from .filters import  filter_log, get_standard_client, get_standard_demanda, filter_to_simplify_dfg
 from .tables import listar_demanda, listar_atividades
 
 from .log_cache import LogCache

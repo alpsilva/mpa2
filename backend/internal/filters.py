@@ -1,6 +1,5 @@
 import pm4py
 from pm4py.objects.log.obj import EventLog
-from pm4py.algo.filtering.dfg.dfg_filtering import filter_dfg_on_activities_percentage, filter_dfg_on_paths_percentage
 from .stats import get_log_statistics
 from .visualization import generate_svg
 
@@ -31,9 +30,9 @@ def filter_log_by_data(log: EventLog, start_date: datetime, end_date: datetime):
 
     return filtered_log
 
-def filter_log(log: EventLog, cliente_filter: str = None, demanda_filter: str = None,
+def filter_log(log: EventLog, caminhos, cliente_filter: str = None, demanda_filter: str = None,
                 start_date: datetime = None, end_date: datetime = None):
-    
+    percentage = (1 + caminhos) * 20 / 100
     if start_date is not None and end_date is not None:
         log = filter_log_by_data(log, start_date, end_date)
     
@@ -71,44 +70,6 @@ def filter_log(log: EventLog, cliente_filter: str = None, demanda_filter: str = 
     }
 
     return log, output
-
-def filter_to_simplify_dfg(log : EventLog, percentage : float, on : str = "activities", category: str = "freq"):
-    """
-    Simplifies a log by taking out unpopular variantes.
-
-    Parameters:
-        log         (pm4py.objects.log) : Log
-        percentage  (float)             : Percentage of activities (0 to 1)
-        on          (str)               : activities or paths
-        category    (str)               : freq or perf
-    Returns:
-        f_dfg, f_start_activities, f_end_activities, f_activities_count 
-        : Resultados filtrados
-    """
-    # Getting dfg
-    if category=="freq":
-        dfg, start_activities, end_activities = pm4py.discover_dfg(log)
-    else:
-        dfg, start_activities, end_activities = pm4py.discover_performance_dfg(log)
-    # Creating count dict
-    activities_count = {}
-    for demanda in log:
-        for atividade in demanda:
-            name = atividade["tarefa"]
-            try:
-                activities_count[name] += 1
-            except:
-                activities_count[name] = 1
-    # Filter by percentage
-    if on=="activities":
-        f_dfg, f_start_activities, f_end_activities, f_activities_count = filter_dfg_on_activities_percentage(
-                dfg, start_activities, end_activities, activities_count, percentage
-            )
-    else:
-        f_dfg, f_start_activities, f_end_activities, f_activities_count = filter_dfg_on_paths_percentage(
-                dfg, start_activities, end_activities, activities_count, percentage
-            )
-    return f_dfg, f_start_activities, f_end_activities, f_activities_count 
 
 def get_standard_client(log):
     clientes_count = {}

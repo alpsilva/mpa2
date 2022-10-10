@@ -23,14 +23,14 @@ class Core:
 
         return output
 
-    def filter_saved_log(self, cliente_filter: str = None, demanda_filter: str = None,
+    def filter_saved_log(self, caminhos, cliente_filter: str = None, demanda_filter: str = None,
                     start_date: datetime = None, end_date: datetime = None):
         log = self.log_cache.get_log()
 
         if demanda_filter == "manutencaoEvolutiva": demanda_filter = "evolutiva"
         if demanda_filter == "novoSistema": demanda_filter = "novo"
 
-        filtered_log, output = filter_log(log, cliente_filter, demanda_filter, start_date, end_date)
+        filtered_log, output = filter_log(log, caminhos, cliente_filter, demanda_filter, start_date, end_date)
 
         self.log_cache.save_filtered_log(filtered_log)
 

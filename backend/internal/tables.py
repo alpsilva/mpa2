@@ -23,16 +23,16 @@ def listar_demanda(log):
         eventos[tarefa]['media'] = 0
         if eventos[tarefa]['quantidade'] > 0:
           eventos[tarefa]['media'] = eventos[tarefa]['tempo'] / eventos[tarefa]['quantidade']
-      obj ['atividades'] = eventos 
+    
+      obj ['atividades'] = list(eventos.values()) 
 
       response.append(obj)
 
       for item in response:
         total_duration = []
         for tarefa in item['atividades']:
-            
             total_duration.append(
-                item['atividades'][tarefa]['tempo']
+                tarefa['tempo']
             )
 
         total = 0

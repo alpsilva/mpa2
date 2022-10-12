@@ -20,6 +20,7 @@ export default function DemandsScreen() {
     async function getDemands() {
         const response = await axios.get('//localhost:8081/bob/tables/demanda');
         const { data } = response;
+        console.log("salve moçada")
 
         const newData = data.map((element) => ({
             case_id: element.case_id,
@@ -36,18 +37,14 @@ export default function DemandsScreen() {
         setRows(newData);
 
         console.log(newData)
+        console.log(newData.atividades)
     }
 
     useEffect(()=> {
         getDemands();
     }, []);
 
-  const [rows, setRows] = useState([{
-    case_id: "",
-    cliente: "",
-    atividades: 0,
-    duracao_total: 0
-  }]);
+  const [rows, setRows] = useState([]);
   return (
     <Box
       sx={{

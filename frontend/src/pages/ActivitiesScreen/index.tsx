@@ -43,7 +43,7 @@ export default function ActivitiesScreen() {
   ];
 
   async function getActivities() {
-    const response = await axios.get('');
+    const response = await axios.get('//localhost:8081/bob/tables/atividades');
     const { data } = response;
 
     const newData = data.map((element : any) => ({

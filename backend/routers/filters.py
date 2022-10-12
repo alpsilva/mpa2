@@ -22,6 +22,7 @@ class NewFilterInput(BaseModel):
     demanda: str
     dataInicial: str
     dataFinal: str
+    caminhos: str
     
 @router.post("/")
 async def filter(request: NewFilterInput):
@@ -29,6 +30,7 @@ async def filter(request: NewFilterInput):
     demanda = request.demanda
     start_date = request.dataInicial
     end_date = request.dataFinal
+    caminhos = int(request.caminhos)
 
     ano = datetime.today().year
     if (start_date == ""):        
@@ -42,7 +44,7 @@ async def filter(request: NewFilterInput):
         end_date = datetime.strptime(end_date, '%Y-%m-%d')
 
 
-    output = get_core().filter_saved_log(cliente_filter=cliente, demanda_filter=demanda,start_date=start_date, end_date=end_date)
+    output = get_core().filter_saved_log(cliente_filter=cliente, caminhos=caminhos, demanda_filter=demanda,start_date=start_date, end_date=end_date)
     log_size = output['detalhes']['logSize']
 
     if log_size == 0:

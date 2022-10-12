@@ -14,7 +14,7 @@ export default function ActivitiesScreen() {
       field: "quantidadeAtividades",
       headerName: "Quantidade de Atividades",
       flex: 15,
-      description: "",
+      description: "A quantidade de atividades",
     },
     {
       field: "frequenciaMinima",

@@ -10,27 +10,27 @@ class Core:
     def __init__(self):
         self.log_cache = LogCache()
 
-    def read_csv(self, file):
+    def read_csv(self, file, caminhos):
         log = read_logs(file)
         self.log_cache.save_log(log)
 
         default_cliente = get_standard_client(log)
         default_demanda = get_standard_demanda(log)
 
-        filtered_log, output = filter_log(log, default_cliente, default_demanda)
+        filtered_log, output = filter_log(log, caminhos, default_cliente, default_demanda)
 
         self.log_cache.save_filtered_log(filtered_log)
 
         return output
 
-    def filter_saved_log(self, cliente_filter: str = None, demanda_filter: str = None,
+    def filter_saved_log(self, caminhos, cliente_filter: str = None, demanda_filter: str = None,
                     start_date: datetime = None, end_date: datetime = None):
         log = self.log_cache.get_log()
 
         if demanda_filter == "manutencaoEvolutiva": demanda_filter = "evolutiva"
         if demanda_filter == "novoSistema": demanda_filter = "novo"
 
-        filtered_log, output = filter_log(log, cliente_filter, demanda_filter, start_date, end_date)
+        filtered_log, output = filter_log(log, caminhos, cliente_filter, demanda_filter, start_date, end_date)
 
         self.log_cache.save_filtered_log(filtered_log)
 

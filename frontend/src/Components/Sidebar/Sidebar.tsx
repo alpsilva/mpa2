@@ -5,7 +5,12 @@ import { Box } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import { Links } from '../../types/enums';
 
-function Sidebar({children}) {
+interface SidebarProps {
+  children ?: any;
+}
+
+function Sidebar(props: SidebarProps) {
+  const { children } = props;
   const navigate = useNavigate();
   return (
     <div style={{width: '100%', height: '100%', backgroundColor: '#131E2F'}}>

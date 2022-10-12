@@ -1,6 +1,7 @@
 import {useState, useEffect, useRef, useCallback} from 'react';
 import { useLocation } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import { Button } from "@mui/material";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import DFG from "../../Components/DFG/DFG";
 // import { cards } from "../../Components/Sidebar/Data";
@@ -38,23 +39,26 @@ function downloadBlob(blob, filename) {
 export default function FilterScreen() {
   const navigate = useNavigate();
   const location = useLocation();
+  const data = location.state.props;
 
   const [exibicao, setExibicao] = useState(location.state.props.filters.exibicao.slice())
-  const [client, setClient] = useState("cliente1")
-  const [demand, setDemand] = useState("novoSistema")
-  const [startDate, setStartDate] = useState("")
-  const [endDate, setEndDate] = useState("")
+  const [client, setClient] = useState(data && data.filters && data.filters.cliente ? data.filters.cliente : "cliente1")
+  const [demand, setDemand] = useState(data && data.filters && data.filters.demanda ? data.filters.demanda : "novoSistema")
+  const [startDate, setStartDate] = useState(data && data.filters && data.filters.dataInicial ? data.filters.dataInicial : "")
+  const [endDate, setEndDate] = useState(data && data.filters && data.filters.dataFinal ? data.filters.dataFinal : "")
   const isFirstRender = useRef(true);
 
+  const [tarefas, setTarefas] = useState(4)
+  const [caminhos,setCaminhos] = useState(4)
+  
   const filters = useRef(
     {
-      client: "cliente1",
-      demand: "novoSistema",
-      startDate: "",
-      endDate: ""
+      client: data && data.filters && data.filters.cliente ? data.filters.cliente : "cliente1",
+      demand: data && data.filters && data.filters.demanda ? data.filters.demanda : "novo",
+      startDate: data && data.filters && data.filters.dataInicial ? data.filters.dataInicial : "",
+      endDate: data && data.filters && data.filters.dataFinal ? data.filters.dataFinal : "",
     })
 
-  const data = location.state.props;
   const freqSVG = data.freq_svg;
   const perfSVG = data.perf_svg;
 
@@ -67,39 +71,6 @@ export default function FilterScreen() {
   }, []);
 
   useEffect(() => {
-    const filterByClient = async () => {
-      await axios.post('//localhost:8081/bob/filter/client', {input: client})
-      .then((response) => {
-          console.log("response", response)
-          navigate('/Filter', {state:{props: response.data}});
-      })
-      .catch((e) => {
-          console.log("Deu ruim, hein!\n\n")
-      })
-    }
-
-    const filterByDemand = async () => {
-      await axios.post('//localhost:8081/bob/filter/demanda', {input: demand})
-      .then((response) => {
-          console.log("response", response)
-          navigate('/Filter', {state:{props: response.data}});
-      })
-      .catch((e) => {
-          console.log("Deu ruim, hein!\n\n")
-      })
-    }
-
-    const filterByDate = async () => {
-      await axios.post('//localhost:8081/bob/filter/data', {dataInicial: startDate, dataFinal: endDate})
-      .then((response) => {
-        console.log("response", response)
-          // navigate('/Filter', {state:{props: response.data}});
-      })
-      .catch((e) => {
-          console.log("Deu ruim, hein!\n\n")
-      })
-    }
-
     const updateFilters = () => {
       filters.current = {
         client: client,
@@ -110,20 +81,51 @@ export default function FilterScreen() {
     }
 
     if(!isFirstRender.current) {
-      if(filters.current.client !== client) {
-        updateFilters()
-        filterByClient()
-      } else if (filters.current.demand !== demand) {
-        updateFilters()
-        filterByDemand()
-      } else {
-        updateFilters()
-        filterByDate()
-      }
+      updateFilters()
     } else {
       isFirstRender.current = false;
     }
   }, [client, demand, startDate, endDate, navigate]);
+
+  const applyFilter = async () => {
+    const body =  {
+      cliente: filters.current.client ? filters.current.client : "cliente1",
+      demanda: filters.current.demand ? filters.current.demand : "novoSistema",
+      dataInicial: filters.current.startDate ? filters.current.startDate : "",
+      dataFinal: filters.current.endDate ? filters.current.endDate : "",
+      // tarefas,
+      caminhos
+    }
+
+    console.log("request body:", body);
+    await axios.post('//localhost:8081/bob/filter', body)
+    .then((response) => {
+      console.log("response", response)
+        navigate('/Filter', {state:{props: response.data}});
+    })
+    .catch((e) => {
+        console.log("Deu ruim, hein!\n\n")
+    })
+  }
+//   useEffect(() => {
+//     const filterByDetails = async () => {
+//       console.log("request body:")
+//       const body = {
+//         tarefas,
+//         caminhos
+//       }
+//       await axios.post('//localhost:8081/bob/simplificacao', body)
+//       .then((response) => {
+//         console.log("response", response)
+//         navigate('/Filter', {state:{props: response.data}});
+//       })
+//       .catch((e) => {
+//           console.log("Deu ruim, hein!\n\n")
+//       })
+    
+//     }
+//   filterByDetails();
+//  },[tarefas,caminhos, navigate])
 
   return (
     <Box
@@ -136,9 +138,12 @@ export default function FilterScreen() {
     >
       <Box sx={{ width: "30%", height: "100%" }}>
         <Sidebar>
-          <DemandsTable setDemand={setDemand}/>
-          <ClientsTable setClient={setClient}/>
-          <DatesTable setStartDate={setStartDate} setEndDate={setEndDate}/>
+          <DemandsTable demand={demand} setDemand={setDemand}/>
+          <ClientsTable client={client} setClient={setClient}/>
+          <DatesTable startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate}/>
+          <Box sx={{paddingLeft: "10px"/*display: "flex", justifyContent:"center"*/}}>          
+            <Button  variant="contained" onClick={applyFilter}>Filtrar</Button>
+          </Box>
         </Sidebar>
         {/* <Sidebar cards={cards} /> */}
       </Box>
@@ -158,7 +163,7 @@ export default function FilterScreen() {
           }}
         >
           <ExibitionTable exibitionProps={exibicao} setExibicao={setExibicao} />
-          <DetailsTable detailsTableProps={mock.detalhes} />
+          <DetailsTable detailsTableProps={mock.detalhes} tarefas={tarefas} setTarefas={setTarefas} caminhos={caminhos} setCaminhos={setCaminhos}/>
           <StatisticsTable statisticsProp={data.stats} />
           <div><button onClick={downloadSVG}>Download Perfomace</button></div>
         </Box>

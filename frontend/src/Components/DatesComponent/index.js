@@ -15,8 +15,8 @@ export default function DatesTable({ setStartDate, setEndDate }) {
   }
 
   return (
-    <Box sx={{ width: "100%", height: "33%" }}>
-      <Box sx={{ width: '45%', maxWidth: '200px', borderRadius: '15px', backgroundColor: '#BCCADA', margin: "auto" }}>
+    <Box sx={{ width: "100%", height: "33%", marginBottom: "80px"}}>
+      <Box sx={{ width: '45%', maxWidth: '200px', borderRadius: '15px', backgroundColor: '#BCCADA', marginLeft: "10px" }}>
         <Typography sx={{ textAlign: "center", fontWeight: "bold"  }}>Datas</Typography>
       </Box>
       <Box sx={{ paddingLeft: "10px"}}>

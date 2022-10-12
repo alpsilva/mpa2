@@ -1,8 +1,8 @@
 import { Box, Typography, RadioGroup, FormControlLabel, Radio } from "@mui/material";
 import { useState } from 'react';
 
-export default function ClientsTable({setClient}) {
-  const [ selectedClient, setSelectedClient ] = useState('cliente1');
+export default function ClientsTable({client, setClient}) {
+  const [ selectedClient, setSelectedClient ] = useState(client);
 
   const handleChange = (event) => {
     setSelectedClient(event.target.value);
@@ -10,7 +10,7 @@ export default function ClientsTable({setClient}) {
   }
   return (
     <Box sx={{ width: "100%", height: "33%",  marginBottom: "70px"}}>
-      <Box sx={{ width: '45%', maxWidth: '200px', height: '24px', borderRadius: '15px', backgroundColor: '#BCCADA', margin: "auto"}}>
+      <Box sx={{ width: '45%', maxWidth: '200px', height: '24px', borderRadius: '15px', backgroundColor: '#BCCADA', marginLeft: "10px"}}>
         <Typography sx={{ textAlign: "center", fontWeight: "bold" }}>Clientes</Typography>
       </Box>
       <Box sx={{ paddingLeft: "10px"}}>

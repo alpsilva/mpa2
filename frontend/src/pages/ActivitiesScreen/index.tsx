@@ -68,6 +68,7 @@ export default function ActivitiesScreen() {
       <Box
         sx={{
           height: "100vh",
+          width: "50vw",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",

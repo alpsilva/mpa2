@@ -112,7 +112,7 @@ export default function DemandsScreen() {
           {rows.map((row) => (
               <Accordion sx={{ margin: "10px 20px" }}>
                   <AccordionSummary>
-                      <Typography sx={{marginRight: '1px'}}>Caso: {row.case_id} </Typography>
+                      <Typography sx={{marginRight: '1%'}}>Caso: {row.case_id} </Typography>
                       <Typography>Cliente: {row.cliente}</Typography>
                   </AccordionSummary>
                   <AccordionDetails>

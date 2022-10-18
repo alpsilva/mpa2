@@ -20,7 +20,6 @@ export default function DemandsScreen() {
     async function getDemands() {
         const response = await axios.get('//localhost:8081/bob/tables/demanda');
         const { data } = response;
-        console.log("salve moçada")
 
         const newData = data.map((element) => ({
             case_id: element.case_id,
@@ -35,9 +34,6 @@ export default function DemandsScreen() {
             duracao_total: element.duracao_total
         }));
         setRows(newData);
-
-        console.log(newData)
-        console.log(newData.atividades)
     }
 
     useEffect(()=> {

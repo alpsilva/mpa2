@@ -97,10 +97,8 @@ export default function FilterScreen() {
       caminhos
     }
 
-    console.log("request body:", body);
     await axios.post('//localhost:8081/bob/filter', body)
     .then((response) => {
-      console.log("response", response)
         navigate('/Filter', {state:{props: response.data}});
     })
     .catch((e) => {

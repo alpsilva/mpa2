@@ -13,8 +13,6 @@ const DetailsTable = ({detailsTableProps, tarefas, setTarefas, caminhos, setCami
       const handleChange2 = (event) => {
         setCaminhos(event.target.value)
         setCaminhosLevel(event.target.value);
-        
-        console.log(caminhos,"Estou aqui")
       }
     //*const { tarefas, caminhos } = detailsTableProps;
     return (

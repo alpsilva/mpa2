@@ -20,13 +20,12 @@ export default function DemandsScreen() {
     async function getDemands() {
         const response = await axios.get('//localhost:8081/bob/tables/demanda');
         const { data } = response;
-        console.log("salve moçada")
 
         const newData = data.map((element) => ({
             case_id: element.case_id,
             cliente: element.cliente,
             atividades: element.atividades.map((atividade) => ({
-                nome_atividade: atividade.nome,
+                nome_atividade: atividade.nome_atividade,
                 primeira_ocorrencia: atividade.primeira_ocorrencia,
                 quantidade: atividade.quantidade,
                 tempo: atividade.tempo,
@@ -35,9 +34,6 @@ export default function DemandsScreen() {
             duracao_total: element.duracao_total
         }));
         setRows(newData);
-
-        console.log(newData)
-        console.log(newData.atividades)
     }
 
     useEffect(()=> {
@@ -117,7 +113,7 @@ export default function DemandsScreen() {
               <Accordion sx={{ margin: "10px 20px" }}>
                   <AccordionSummary>
                       <Typography>Caso: {row.case_id}</Typography>
-                      <Typography>Cliente: {row.cliente}</Typography>
+                      <Typography> Cliente: {row.cliente}</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
                       <Typography>Atividades:</Typography>
@@ -136,7 +132,7 @@ export default function DemandsScreen() {
                                   <TableBody>
                                       {row.atividades.map((atividade) => (
                                           <TableRow
-                                              key={atividade.nome}
+                                              key={atividade.nome_atividade}
                                               sx={{
                                                   "&:last-child td, &:last-child th": { border: 0 },
                                               }}

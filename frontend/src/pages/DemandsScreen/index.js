@@ -132,7 +132,7 @@ export default function DemandsScreen() {
                                   <TableBody>
                                       {row.atividades.map((atividade) => (
                                           <TableRow
-                                              key={atividade.nome}
+                                              key={atividade.nome_atividade}
                                               sx={{
                                                   "&:last-child td, &:last-child th": { border: 0 },
                                               }}

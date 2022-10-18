@@ -25,7 +25,7 @@ export default function DemandsScreen() {
             case_id: element.case_id,
             cliente: element.cliente,
             atividades: element.atividades.map((atividade) => ({
-                nome_atividade: atividade.nome,
+                nome_atividade: atividade.nome_atividade,
                 primeira_ocorrencia: atividade.primeira_ocorrencia,
                 quantidade: atividade.quantidade,
                 tempo: atividade.tempo,

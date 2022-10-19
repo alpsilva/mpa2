@@ -62,16 +62,17 @@ export default function ActivitiesScreen() {
 
   return (
     <Box sx={{ width: "100%", height: "100vh", backgroundColor: "#BCCADA", display: flex }}>
-      <Box sx={{ width: "30vh", height: "100vh" }}>
+      <Box sx={{ width: "25vw", height: "100vh" }}>
         <Sidebar />
       </Box>
       <Box
         sx={{
-          height: "50vh",
-          width: "50vw",
+          height: "100vh",
+          width: "75vw",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          backgroundColor: "#f2f0f0"
         }}
       >
         <DataGrid

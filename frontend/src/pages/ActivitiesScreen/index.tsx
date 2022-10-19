@@ -61,7 +61,7 @@ export default function ActivitiesScreen() {
   },[]);
 
   return (
-    <div style={{ width: "100%", height: "100vh", backgroundColor: "#BCCADA" }}>
+    <Box sx={{ width: "100%", height: "100vh", backgroundColor: "#BCCADA" }}>
       <Box sx={{ width: "30vh", height: "100vh" }}>
         <Sidebar />
       </Box>
@@ -83,6 +83,6 @@ export default function ActivitiesScreen() {
           loading={true}
         />
       </Box>
-    </div>
+    </Box>
   );
 }

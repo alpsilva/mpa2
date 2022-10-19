@@ -33,7 +33,9 @@ export default function DemandsScreen() {
             })),
             duracao_total: element.duracao_total
         }));
-        setRows(newData);
+        setRows(newData.sort((a, b) => {
+          return a.case_id - b.case_id
+      }));
     }
 
     useEffect(()=> {

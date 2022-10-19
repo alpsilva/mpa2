@@ -14,3 +14,8 @@ async def filter_by_client():
     ordered_table = sorted(table, key = lambda d: d['duracao_total'], reverse=True)
 
     return ordered_table
+
+@router.get("/atividade")
+async def filter_by_client():   
+    table = get_core().get_atividades_table()
+    return table

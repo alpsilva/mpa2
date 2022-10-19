@@ -61,7 +61,7 @@ export default function ActivitiesScreen() {
   },[]);
 
   return (
-    <Box sx={{ width: "100%", height: "100vh", backgroundColor: "#BCCADA" }}>
+    <Box sx={{ width: "100%", height: "100vh", backgroundColor: "#BCCADA", display: flex }}>
       <Box sx={{ width: "30vh", height: "100vh" }}>
         <Sidebar />
       </Box>

@@ -36,12 +36,15 @@ function downloadBlob(blob, filename) {
 
   setTimeout(() => URL.revokeObjectURL(objectUrl), 5000);
 }
-export default function FilterScreen() {
+export default function FilterScreen(props) {
   const navigate = useNavigate();
   const location = useLocation();
-  const data = location.state.props;
 
-  const [exibicao, setExibicao] = useState(location.state.props.filters.exibicao.slice())
+  // const data = location.state.props;
+  const data = props.data;
+
+  const [exibicao, setExibicao] = useState(data.filters.exibicao.slice())
+
   const [client, setClient] = useState(data && data.filters && data.filters.cliente ? data.filters.cliente : "cliente1")
   const [demand, setDemand] = useState(data && data.filters && data.filters.demanda ? data.filters.demanda : "novoSistema")
   const [startDate, setStartDate] = useState(data && data.filters && data.filters.dataInicial ? data.filters.dataInicial : "")
@@ -99,7 +102,9 @@ export default function FilterScreen() {
 
     await axios.post('//localhost:8081/bob/filter', body)
     .then((response) => {
-        navigate('/Filter', {state:{props: response.data}});
+        // navigate('/Filter', {state:{props: response.data}});
+        props.setData(response.data)
+        navigate('/Filter');
     })
     .catch((e) => {
         console.log("Deu ruim, hein!\n\n")

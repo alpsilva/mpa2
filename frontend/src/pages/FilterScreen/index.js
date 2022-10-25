@@ -141,9 +141,11 @@ export default function FilterScreen(props) {
     >
       <Box sx={{ width: "30%", height: "100%" }}>
         <Sidebar>
-          <DemandsTable demand={demand} setDemand={setDemand}/>
-          <ClientsTable client={client} setClient={setClient}/>
-          <DatesTable startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate}/>
+          <Box sx={{display:'flex', flexDirection:'column', marginBottom:'20px', marginTop: "20px"}}>
+            <DemandsTable demand={demand} setDemand={setDemand}/>
+            <ClientsTable client={client} setClient={setClient}/>
+            <DatesTable startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate}/>
+          </Box>
           <Box sx={{paddingLeft: "10px"/*display: "flex", justifyContent:"center"*/}}>          
             <Button  variant="contained" onClick={applyFilter}>Filtrar</Button>
           </Box>

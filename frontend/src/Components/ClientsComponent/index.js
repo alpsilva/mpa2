@@ -9,7 +9,7 @@ export default function ClientsTable({client, setClient}) {
     setClient(event.target.value);
   }
   return (
-    <Box sx={{ width: "100%", height: "33%",  marginBottom: "70px"}}>
+    <Box sx={{ width: "100%", height: "33%"}}>
       <Box sx={{ width: '45%', maxWidth: '200px', height: '24px', borderRadius: '15px', backgroundColor: '#BCCADA', marginLeft: "10px"}}>
         <Typography sx={{ textAlign: "center", fontWeight: "bold" }}>Clientes</Typography>
       </Box>

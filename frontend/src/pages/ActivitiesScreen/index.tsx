@@ -20,25 +20,49 @@ export default function ActivitiesScreen() {
       field: "frequenciaMinima",
       headerName: "Frequência Mínima",
       flex: 10,
-      description: "O número mínimo de vezes que uma atividade se repetiu.",
+      description: "O número mínimo de vezes que a atividade se repetiu.",
     },
     {
       field: "frequenciaMaxima",
       headerName: "Frequência Máxima",
       flex: 10,
-      description: "O número máximo de vezes que uma atividade se repetiu.",
+      description: "O número máximo de vezes que a atividade se repetiu.",
+    },
+    {
+      field: "frequenciaMedia",
+      headerName: "Frequência Media",
+      flex: 10,
+      description: "O número médio de vezes que a atividade se repetiu.",
+    },
+    {
+      field: "frequenciaMediana",
+      headerName: "Frequência Mediana",
+      flex: 10,
+      description: "O número mediano de vezes que a atividade se repetiu.",
     },
     {
       field: "duracaoMinima",
       headerName: "Duração Mínima",
       flex: 10,
-      description: "O mínimo de tempo que uma atividade durou.",
+      description: "O mínimo de tempo que a atividade durou.",
     },
     {
       field: "duracaoMaxima",
       headerName: "Duração Máxima",
       flex: 10,
-      description: "O máximo de tempo que uma atividade durou.",
+      description: "O máximo de tempo que a atividade durou.",
+    },
+    {
+      field: "duracaoMediana",
+      headerName: "Mediana das Durações",
+      flex: 10,
+      description: "A mediana de tempo que a atividade durou.",
+    },
+    {
+      field: "duracaoMedia",
+      headerName: "Duração Média",
+      flex: 10,
+      description: "A média de tempo que a atividade durou.",
     },
   ];
 
@@ -47,11 +71,15 @@ export default function ActivitiesScreen() {
     const { data } = response;
 
     const newData = data.map((element : any) => ({
-      quantidadeAtividades: element.quantidadeAtividades,
-      frequenciaMinima: element.frequenciaMinima,
-      frequenciaMaxima: element.frequenciaMaxima,
-      duracaoMinima: element.duracaoMinima,
-      duracaoMaxima: element.duracaoMaxima,
+      quantidadeAtividades: element.totalQuant,
+      frequenciaMinima: element.minQuant,
+      frequenciaMaxima: element.maxQuant,
+      frequenciaMediana: element.medianaQuant,
+      frequenciaMedia: element.avgQuant,
+      duracaoMinima: element.minTempo,
+      duracaoMaxima: element.maxTempo,
+      duracaoMediana: element.medianaTempo,
+      duracaoMedia: element.avgTempo,
     }));
     setRows(newData);
   }

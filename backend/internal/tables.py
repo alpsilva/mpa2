@@ -1,5 +1,6 @@
 from datetime import timedelta
 import pm4py
+import statistics
 
 def listar_demanda(log): 
     response = [] 

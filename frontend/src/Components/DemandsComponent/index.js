@@ -10,7 +10,7 @@ export default function DemandsTable({ demand, setDemand }) {
   }
 
   return (
-    <Box sx={{ width: "100%", height: "33%", marginBottom: "40px", marginTop: "20px"}}>
+    <Box sx={{ width: "100%", height: "33%"}}>
       <Box sx={{ width: '45%', maxWidth: '200px', borderRadius: '15px', backgroundColor: '#BCCADA', marginLeft: "10px"}}>
         <Typography sx={{ textAlign: "center", fontWeight: "bold" }}>Tipos de demanda</Typography>
       </Box>

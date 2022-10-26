@@ -25,8 +25,6 @@ def filter_log_by_data(log: EventLog, start_date: datetime, end_date: datetime):
         date_last_event = (trace[-1])["dt_fim"]
         if( start_date < date_last_event < end_date):
             filtered_log.append(trace)
-    if (len(filtered_log) < 1):
-        return len(log)
 
     return filtered_log
 
@@ -68,7 +66,7 @@ def filter_log(log: EventLog, caminhos, cliente_filter: str = None, demanda_filt
         "freq_svg": freq_dfg_str,
         "perf_svg": perf_dfg_str
     }
-
+    # print ("return log:", log)
     return log, output
 
 def get_standard_client(log):

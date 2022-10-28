@@ -54,7 +54,10 @@ def filter_log(log: EventLog, caminhos, cliente_filter: str = None, demanda_filt
         "filters": {
             "cliente": cliente_filter,
             "demanda": demanda_filter,
-            "exibicao": "frequencia"
+            "exibicao": "frequencia",
+            "caminhos": caminhos,
+            "startDate": start_date,
+            "endDate": end_date
         },
 
         "stats": stats,
@@ -66,7 +69,7 @@ def filter_log(log: EventLog, caminhos, cliente_filter: str = None, demanda_filt
         "freq_svg": freq_dfg_str,
         "perf_svg": perf_dfg_str
     }
-    # print ("return log:", log)
+
     return log, output
 
 def get_standard_client(log):

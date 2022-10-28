@@ -1,6 +1,19 @@
 # mpa2
 Repositório para a implementação de ferramenta de mineração de processos para a disciplina de Seminários em Gerenciamento de Dados e Informação.
 
+# Clonar o repositório
+> Você deverá ter o Git instalado em sua máquina.
+
+```bash
+git clone https://github.com/alpsilva/mpa2.git
+```
+
+> Se você já tinha o repositório clonado, pode ser interessante dar pull para garantir que está com a versão mais atualizada. Dentro da pasta do repositório, use o comando git pull.
+
+```bash
+git pull
+```
+
 # Para executar o back-end
 
 > Você deverá ter o Docker instalado em sua máquina.

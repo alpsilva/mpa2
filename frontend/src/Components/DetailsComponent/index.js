@@ -3,13 +3,8 @@ import { useState } from "react";
 
 const DetailsTable = ({detailsTableProps, tarefas, setTarefas, caminhos, setCaminhos}) => {
    
-    // const [ tarefasLevel, setTarefasLevel ] = useState(4);
-    const [ caminhosLevel, setCaminhosLevel ] = useState(4);
-    // const handleChange1 = (event) => {
-    //     setTarefasLevel(event.target.value);
-    //     setTarefas(event.target.value)
-    //     console.log(tarefas,"Não estou aqui")
-    //   }
+    const [ caminhosLevel, setCaminhosLevel ] = useState(typeof caminhos === 'number'? caminhos : 4);
+
       const handleChange2 = (event) => {
         setCaminhos(event.target.value)
         setCaminhosLevel(event.target.value);

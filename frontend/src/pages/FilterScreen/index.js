@@ -47,19 +47,19 @@ export default function FilterScreen(props) {
 
   const [client, setClient] = useState(data && data.filters && data.filters.cliente ? data.filters.cliente : "cliente1")
   const [demand, setDemand] = useState(data && data.filters && data.filters.demanda ? data.filters.demanda : "novoSistema")
-  const [startDate, setStartDate] = useState(data && data.filters && data.filters.dataInicial ? data.filters.dataInicial : "")
-  const [endDate, setEndDate] = useState(data && data.filters && data.filters.dataFinal ? data.filters.dataFinal : "")
+  const [startDate, setStartDate] = useState(data && data.filters && data.filters.startDate ? data.filters.startDate.replace(/t.*/i, "") : "")
+  const [endDate, setEndDate] = useState(data && data.filters && data.filters.endDate ? data.filters.endDate.replace(/t.*/i, "") : "")
   const isFirstRender = useRef(true);
 
+  const [caminhos,setCaminhos] = useState(data && data.filters && typeof data.filters.caminhos === 'number' ? data.filters.caminhos : 4)
   const [tarefas, setTarefas] = useState(4)
-  const [caminhos,setCaminhos] = useState(4)
   
   const filters = useRef(
     {
       client: data && data.filters && data.filters.cliente ? data.filters.cliente : "cliente1",
       demand: data && data.filters && data.filters.demanda ? data.filters.demanda : "novo",
-      startDate: data && data.filters && data.filters.dataInicial ? data.filters.dataInicial : "",
-      endDate: data && data.filters && data.filters.dataFinal ? data.filters.dataFinal : "",
+      startDate: data && data.filters && data.filters.startDate ? data.filters.startDate.replace(/t.*/i, "") : "",
+      endDate: data && data.filters && data.filters.endDate ? data.filters.endDate.replace(/t.*/i, "") : "",
     })
 
   const freqSVG = data.freq_svg;

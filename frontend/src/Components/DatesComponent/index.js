@@ -4,7 +4,7 @@ import { Box, Typography } from "@mui/material";
 
 
 
-export default function DatesTable({ setStartDate, setEndDate }) {
+export default function DatesTable({ startDate, endDate, setStartDate, setEndDate }) {
 
   const handleStartDateChange = (event) => {
     setStartDate(event.target.value);
@@ -13,6 +13,8 @@ export default function DatesTable({ setStartDate, setEndDate }) {
   const handleEndDateChange = (event) => {
     setEndDate(event.target.value);
   }
+  const sDate = typeof startDate === 'string' ? startDate.replace(/t.*/i, "") : "";
+  const eDate = typeof endDate === 'string' ? endDate.replace(/t.*/i, "") : ""
 
   return (
     <Box sx={{ width: "100%", height: "33%"}}>
@@ -22,11 +24,11 @@ export default function DatesTable({ setStartDate, setEndDate }) {
       <Box sx={{ paddingLeft: "10px"}}>
         <Box mt={"12px"}>
           <Typography sx={{ color: 'white' }} >Início</Typography>
-          <input type="date" onChange={handleStartDateChange} id="start" name="start"/>
+          <input type="date" value={sDate} onChange={handleStartDateChange} id="start" name="start"/>
         </Box>
         <Box mt={"12px"}>
           <Typography sx={{ color: 'white' }}>Fim</Typography>
-          <input type="date" onChange={handleEndDateChange} id="end" name="end"/>
+          <input type="date" value={eDate} onChange={handleEndDateChange} id="end" name="end"/>
         </Box>
       </Box>
     </Box>
